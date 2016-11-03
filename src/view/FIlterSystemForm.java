@@ -5,6 +5,15 @@
  */
 package view;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author bruno
@@ -16,6 +25,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
      */
     public FIlterSystemForm() {
         initComponents();
+        this.xmlFiles = new HashSet<>();
     }
 
     /**
@@ -39,13 +49,12 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jPanelRegisterProject = new javax.swing.JPanel();
         jLabelNameProject = new javax.swing.JLabel();
         jTextFieldNameProject = new javax.swing.JTextField();
-        jPanelOptions = new javax.swing.JPanel();
-        jRadioButtonOptionMultipleProjects = new javax.swing.JRadioButton();
-        jRadioButtonOptionSingleProject = new javax.swing.JRadioButton();
         jButtonSelectXML = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaSelectedProjects = new javax.swing.JTextArea();
+        jTextAreaXmlFiles = new javax.swing.JTextArea();
         jButtonDone = new javax.swing.JButton();
+        jLabelXmlSelected = new javax.swing.JLabel();
+        jButtonCleanTextArea = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemExit = new javax.swing.JMenuItem();
@@ -55,6 +64,8 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jMenuItemRemoveDetectionStrategy = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FindSmells");
+        setResizable(false);
 
         jPanelFilterSystem.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtering of system"));
 
@@ -73,35 +84,37 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jPanelFilterSystemLayout.setHorizontalGroup(
             jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonFilter)
+                .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
-                        .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDetectionStrategy)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFilterSystemLayout.createSequentialGroup()
-                                .addComponent(jLabelProject)
-                                .addGap(37, 37, 37)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxDetectionStrategy, 0, 235, Short.MAX_VALUE)
-                            .addComponent(jComboBoxProject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabelDetectionStrategy))
+                    .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabelProject)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBoxDetectionStrategy, 0, 235, Short.MAX_VALUE)
+                    .addComponent(jComboBoxProject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(118, 118, 118))
+            .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(jButtonFilter)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelFilterSystemLayout.setVerticalGroup(
             jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDetectionStrategy)
                     .addComponent(jComboBoxDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelProject)
                     .addComponent(jComboBoxProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jButtonFilter)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jPanelRegisterProject.setBorder(javax.swing.BorderFactory.createTitledBorder("Register System"));
@@ -109,57 +122,33 @@ public class FIlterSystemForm extends javax.swing.JFrame {
 
         jLabelNameProject.setText("Project:");
 
-        jTextFieldNameProject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNameProjectActionPerformed(evt);
-            }
-        });
-
-        jPanelOptions.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
-
-        jRadioButtonOptionMultipleProjects.setText("Register multiple projects");
-        jRadioButtonOptionMultipleProjects.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonOptionMultipleProjectsActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonOptionSingleProject.setText("Register a single project");
-        jRadioButtonOptionSingleProject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonOptionSingleProjectActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
-        jPanelOptions.setLayout(jPanelOptionsLayout);
-        jPanelOptionsLayout.setHorizontalGroup(
-            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonOptionMultipleProjects)
-                    .addComponent(jRadioButtonOptionSingleProject))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelOptionsLayout.setVerticalGroup(
-            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelOptionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButtonOptionMultipleProjects)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonOptionSingleProject)
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
         jButtonSelectXML.setText("Select Files XML");
+        jButtonSelectXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelectXMLActionPerformed(evt);
+            }
+        });
 
-        jTextAreaSelectedProjects.setEditable(false);
-        jTextAreaSelectedProjects.setColumns(20);
-        jTextAreaSelectedProjects.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaSelectedProjects);
+        jTextAreaXmlFiles.setEditable(false);
+        jTextAreaXmlFiles.setColumns(20);
+        jTextAreaXmlFiles.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaXmlFiles);
 
         jButtonDone.setText("Done");
+        jButtonDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDoneActionPerformed(evt);
+            }
+        });
+
+        jLabelXmlSelected.setText("XMLs Selected:");
+
+        jButtonCleanTextArea.setText("Clean XML Selected");
+        jButtonCleanTextArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanTextAreaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRegisterProjectLayout = new javax.swing.GroupLayout(jPanelRegisterProject);
         jPanelRegisterProject.setLayout(jPanelRegisterProjectLayout);
@@ -169,38 +158,45 @@ public class FIlterSystemForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
-                        .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanelOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
-                                .addComponent(jLabelNameProject)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameProject, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(80, Short.MAX_VALUE))
+                        .addComponent(jLabelNameProject)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNameProject)
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
+                        .addComponent(jLabelXmlSelected)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSelectXML, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterProjectLayout.createSequentialGroup()
                                 .addComponent(jButtonDone)
-                                .addGap(40, 40, 40))))))
+                                .addGap(62, 62, 62))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterProjectLayout.createSequentialGroup()
+                                .addComponent(jButtonCleanTextArea)
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterProjectLayout.createSequentialGroup()
+                                .addComponent(jButtonSelectXML)
+                                .addGap(35, 35, 35))))))
         );
         jPanelRegisterProjectLayout.setVerticalGroup(
             jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(43, 43, 43)
                 .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNameProject)
                     .addComponent(jTextFieldNameProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanelOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelXmlSelected)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
                         .addComponent(jButtonSelectXML)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButtonCleanTextArea)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDone))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,11 +214,11 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelFilterSystem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanelRegisterProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelRegisterProject, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         jPanelRegisterProject.getAccessibleContext().setAccessibleName("Register Project");
@@ -267,7 +263,9 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 621, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -281,43 +279,44 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemUpdateThresholdActionPerformed
 
-    private void jTextFieldNameProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameProjectActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNameProjectActionPerformed
+    private void jButtonSelectXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectXMLActionPerformed
+        JFileChooser c = new JFileChooser();
+        c.setMultiSelectionEnabled(true);
+        FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+        c.setDialogTitle("Open schedule file");
+        c.setFileFilter(xmlfilter);
+        c.showOpenDialog(this);  
+        File[] files = c.getSelectedFiles();
 
-    private void jRadioButtonOptionMultipleProjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOptionMultipleProjectsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonOptionMultipleProjectsActionPerformed
+        try {
+            if (files != null) {
+                long length = 0;
+                for (File f : files) {
+                    this.xmlFiles.add(f);
+                    length += f.length();
+                    Path path = Paths.get(f.getName());
+                    if (this.jTextAreaXmlFiles.getText().equals("")) {
+                        this.jTextAreaXmlFiles.setText(path.toString());
+                    } else {
+                        this.jTextAreaXmlFiles.setText(this.jTextAreaXmlFiles.getText() + "\n" + path.toString());
+                    }
+                }
+            }
 
-    private void jRadioButtonOptionSingleProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOptionSingleProjectActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonOptionSingleProjectActionPerformed
+        } catch (Exception e1) {
+            JOptionPane.showMessageDialog(this, "File Upload Failed!");
+        }
+    }//GEN-LAST:event_jButtonSelectXMLActionPerformed
 
-//    private void createJTableWithResults(){
-//        this.jTableFilteredArtifacts = new JTable();
-//        jTableFilteredArtifacts.setModel(new javax.swing.table.DefaultTableModel(
-//            new Object [][] {
-//                {null, null, null, null},
-//                {null, null, null, null},
-//                {null, null, null, null},
-//                {null, null, null, null}
-//            },
-//            new String [] {
-//                "Title 1", "Title 2", "Title 3", "Title 4"
-//            }
-//        ) {
-//            boolean[] canEdit = new boolean [] {
-//                false, false, false, false
-//            };
-//
-//            public boolean isCellEditable(int rowIndex, int columnIndex) {
-//                return canEdit [columnIndex];
-//            }
-//        });
-//        jTableFilteredArtifacts.getTableHeader().setReorderingAllowed(false);
-//        jScrollPane1.setViewportView(jTableFilteredArtifacts);
-//    }
-    
+    private void jButtonCleanTextAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanTextAreaActionPerformed
+        this.xmlFiles.clear();
+        this.jTextAreaXmlFiles.setText("");
+    }//GEN-LAST:event_jButtonCleanTextAreaActionPerformed
+
+    private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
+        System.out.println(this.jTextFieldNameProject.getText());
+    }//GEN-LAST:event_jButtonDoneActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,6 +355,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButtonCleanTextArea;
     private javax.swing.JButton jButtonDone;
     private javax.swing.JButton jButtonFilter;
     private javax.swing.JButton jButtonSelectXML;
@@ -364,6 +364,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDetectionStrategy;
     private javax.swing.JLabel jLabelNameProject;
     private javax.swing.JLabel jLabelProject;
+    private javax.swing.JLabel jLabelXmlSelected;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCreateDetectionStrategy;
@@ -373,13 +374,10 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuTool;
     private javax.swing.JPanel jPanelFilterSystem;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JPanel jPanelOptions;
     private javax.swing.JPanel jPanelRegisterProject;
-    private javax.swing.JRadioButton jRadioButtonOptionMultipleProjects;
-    private javax.swing.JRadioButton jRadioButtonOptionSingleProject;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaSelectedProjects;
+    private javax.swing.JTextArea jTextAreaXmlFiles;
     private javax.swing.JTextField jTextFieldNameProject;
     // End of variables declaration//GEN-END:variables
-//    private javax.swing.JTable jTableFilteredArtifacts;
+    private Set<File> xmlFiles;
 }
