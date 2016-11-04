@@ -191,6 +191,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="selectProjects();"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDetectionStrategy">
               <Properties>
@@ -208,6 +211,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="selectDetectionStrategies();"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonFilter">
               <Properties>

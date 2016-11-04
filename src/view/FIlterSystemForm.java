@@ -5,14 +5,21 @@
  */
 package view;
 
+import filter.Filter;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import structure.DetectionStrategy;
+import structure.Project;
+import structure.dao.DAO;
+import structure.dao.ProjectDAO;
 
 /**
  *
@@ -72,10 +79,12 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jLabelProject.setText("Choose a Project:");
 
         jComboBoxProject.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectProjects();
 
         jLabelDetectionStrategy.setText("Choose a Detection Strategy:");
 
         jComboBoxDetectionStrategy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectDetectionStrategies();
 
         jButtonFilter.setText("Filter");
 
@@ -314,9 +323,52 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCleanTextAreaActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        System.out.println(this.jTextFieldNameProject.getText());
+        Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
+        filter.convertFiles();
+        finish();
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
+    private void finish(){
+        selectProjects();
+        selectDetectionStrategies();
+        this.xmlFiles.clear();
+        jTextFieldNameProject.setText("");
+        jTextAreaXmlFiles.setText("");
+        System.out.println("Operation was successful!");
+        JOptionPane.showMessageDialog(this, "Operation was successful!");
+    }
+    
+    private void selectProjects() {
+        DAO dao = new ProjectDAO();
+        List<Project> projects = (List<Project>) dao.selectAll();
+        DefaultComboBoxModel combo = new DefaultComboBoxModel();
+        if (projects.size() > 0) {
+            for (Project p : projects) {
+                combo.addElement(p.getName());
+            }
+            this.jComboBoxProject.setModel(combo);
+        } else {
+            combo.addElement("There aren't projects recorded!");
+            this.jComboBoxProject.setModel(combo);
+        }
+    }
+    
+    private void selectDetectionStrategies() {
+        DAO dao = new ProjectDAO();
+        List<DetectionStrategy> detectionStrategies = (List<DetectionStrategy>) dao.selectAll();
+        DefaultComboBoxModel combo = new DefaultComboBoxModel();
+        if (detectionStrategies.size() > 0) {
+            for (DetectionStrategy p : detectionStrategies) {
+                combo.addElement(p.getName());
+            }
+            this.jComboBoxDetectionStrategy.setModel(combo);
+        } else {
+            combo.addElement("There aren't detection strategies recorded!");
+            this.jComboBoxDetectionStrategy.setModel(combo);
+        }
+    }
+
+    
     /**
      * @param args the command line arguments
      */
