@@ -168,7 +168,7 @@ public class ProjectDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT * FROM project");
+            ps = connection.prepareStatement("SELECT * FROM project ORDER BY name ASC");
             ResultSet rs = ps.executeQuery();
             List<Project> projects = new ArrayList<>();
             while (rs.next()) {

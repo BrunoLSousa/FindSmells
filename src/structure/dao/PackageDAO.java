@@ -162,4 +162,25 @@ public class PackageDAO implements DAOMetric {
         return null;
     }
 
+    @Override
+    public int totalArtifacts(Project project) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("SELECT nop FROM measure_project WHERE project=?");
+            ps.setInt(1, project.getId());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return rs.getInt("nop");
+            }
+            return 0;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return 0;
+    }
+
 }

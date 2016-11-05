@@ -84,7 +84,7 @@ public class DetectionStrategyDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT * FROM detection_strategy");
+            ps = connection.prepareStatement("SELECT * FROM detection_strategy ORDER BY name ASC");
             ResultSet rs = ps.executeQuery();
             List<DetectionStrategy> detectionStrategies = new ArrayList<>();
             while (rs.next()) {

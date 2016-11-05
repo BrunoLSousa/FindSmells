@@ -18,4 +18,6 @@ public interface DAOMetric extends DAO{
     
     public Object applyDetectionStrategy(DetectionStrategy detectionStrategy, Project project);
     
+    public int totalArtifacts(Project project);
+    
 }

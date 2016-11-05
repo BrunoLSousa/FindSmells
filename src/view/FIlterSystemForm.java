@@ -17,11 +17,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import metrics.Granulatiry;
 import structure.DetectionStrategy;
 import structure.Project;
 import structure.dao.DAO;
 import structure.dao.DetectionStrategyDAO;
 import structure.dao.ProjectDAO;
+import structure.Type;
+import structure.dao.MethodDAO;
+import structure.dao.PackageDAO;
+import structure.dao.TypeDAO;
 
 /**
  *
@@ -347,12 +352,21 @@ public class FIlterSystemForm extends javax.swing.JFrame {
 
     private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
         if(!jComboBoxProject.getSelectedItem().equals("There aren't projects recorded!") && !jComboBoxDetectionStrategy.getSelectedItem().equals("There aren't detection strategies recorded!")){
-            
+            List<DetectionStrategy> detections = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
+            List<Project> projects = (List<Project>) new ProjectDAO().selectAll();
+            Object artefactsWithBadSmells;
+            if(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Type)){
+                artefactsWithBadSmells = new TypeDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
+            }else if(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Method)){
+                artefactsWithBadSmells = new MethodDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
+            }else{
+                artefactsWithBadSmells = new PackageDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
+            }
+            ResultsFiltering results = new ResultsFiltering(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity());
+            results.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(this, "Verify if there is any project and detection strategy recorded!", "Attention", JOptionPane.WARNING_MESSAGE, null);
         }
-//        System.out.println(this.jComboBoxProject.getSelectedItem());
-//        System.out.println(this.jComboBoxDetectionStrategy.getSelectedItem());
     }//GEN-LAST:event_jButtonFilterActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
