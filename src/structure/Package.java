@@ -16,13 +16,13 @@ public class Package extends Artifact{
     
     private HashMap<MetricPackage, Double> metrics;
     
-    public Package(Integer id, String name, Project project, String source, String pack){
-        super(id, name, project, source, pack);
+    public Package(Integer id, String name, Project project, String pack){
+        super(id, name, project, pack);
         initializeMetrics();
     }
     
-    public Package(String name, Project project, String source, String pack){
-        super(name, project, source, pack);
+    public Package(String name, Project project, String pack){
+        super(name, project, pack);
         initializeMetrics();
     }
     

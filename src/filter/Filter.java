@@ -76,7 +76,9 @@ public class Filter {
                 cycle.setId(idCycle);
                 converterDataCycle(cycle, e.getChildren());
             } else if (e.getName().equals("Metric")) {
+                System.out.println("Métrica " + e.getAttributeValue("id") + " iniciada");
                 converterMetrics(e.getAttributeValue("id"), e.getChildren());
+                System.out.println("\n");
             }
         }
     }
@@ -94,6 +96,7 @@ public class Filter {
     }
 
     private void converterMetricProject(String nameMetric, List<Element> elements) {
+        int cont = 1;
         for (Element el : elements) {
             HashMap<MetricProject, Double> metrics = new ProjectDAO().selectMetricsProject(project);
             MetricProject metric = MetricProject.valueOf(nameMetric.toUpperCase());
@@ -105,44 +108,60 @@ public class Filter {
             } else {
                 new ProjectDAO().updateMetricProject(project);
             }
+            System.out.println(cont);
+            cont++;
         }
     }
 
     private void converterMetricPackage(String nameMetric, List<Element> elements) {
+        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new PackageDAO();
-            List<Package> packs = (List<Package>) dao.selectByObject(this.project);
-            Package pack = null;
+            Package pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("package"));
+            List<Package> packs = (List<Package>) dao.selectByObject(pack);
             if (packs.size() > 0) {
                 for (Package p : packs) {
-                    pack = (p.getValueMetric(MetricPackage.valueOf(nameMetric.toUpperCase())) == -1.0) ? p : null;
+                    if(p.getValueMetric(MetricPackage.valueOf(nameMetric.toUpperCase())) == -1.0){
+                        pack = p;
+                        break;
+                    }else{
+                        pack = null;
+                    }
                 }
                 if (pack != null) {
                     pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
                     dao.update(pack);
                 } else {
-                    pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
+                    pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("package"));
                     pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
                     dao.register(pack);
                 }
             } else {
-                pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
+                pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("package"));
                 pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
                 dao.register(pack);
             }
+            System.out.println(cont);
+            cont++;
         }
     }
 
     private void converterMetricMethod(String nameMetric, List<Element> elements) {
+        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new MethodDAO();
-            List<Method> methods = (List<Method>) dao.selectByObject(this.project);
-            Method method = null;
+            Method method = new Method(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
+            List<Method> methods = (List<Method>) dao.selectByObject(method);
             if (methods.size() > 0) {
                 for (Method m : methods) {
-                    method = (m.getValueMetric(MetricMethod.valueOf(nameMetric.toUpperCase())) == -1.0) ? m : null;
+                    if(m.getValueMetric(MetricMethod.valueOf(nameMetric.toUpperCase())) == -1.0){
+                        method = m;
+                        break;
+                    }else{
+                        method = null;
+                    }
                 }
                 if (method != null) {
                     method.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
@@ -157,19 +176,27 @@ public class Filter {
                 method.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
                 dao.register(method);
             }
+            System.out.println(cont);
+            cont++;
         }
 
     }
 
     private void converterMetricType(String nameMetric, List<Element> elements) {
+        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new TypeDAO();
-            List<Type> types = (List<Type>) dao.selectByObject(this.project);
-            Type type = null;
+            Type type = new Type(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
+            List<Type> types = (List<Type>) dao.selectByObject(type);
             if (types.size() > 0) {
                 for (Type t : types) {
-                    type = (t.getValueMetric(MetricClass.valueOf(nameMetric.toUpperCase())) == -1.0) ? t : null;
+                    if(t.getValueMetric(MetricClass.valueOf(nameMetric.toUpperCase())) == -1.0){
+                        type = t;
+                        break;
+                    }else{
+                        type = null;
+                    }
                 }
                 if (type != null) {
                     type.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
@@ -185,10 +212,12 @@ public class Filter {
                 dao.register(type);
             }
         }
+        System.out.println(cont);
+        cont++;
     }
 
     private void converterDataCycle(Cycle cycle, List<Element> elements) {
-        elements = elements.get(0).getChildren();
+//        elements = elements.get(0).getChildren();
         for (Element el : elements) {
 //            cycle.addDataCycle(el.getContent().get(0).getValue());
             new CycleDAO().registerCycleData(cycle.getId(), el.getContent().get(0).getValue());

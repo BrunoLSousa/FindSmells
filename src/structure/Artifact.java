@@ -14,21 +14,18 @@ public abstract class Artifact {
     private Integer id;
     private String name;
     private Project project;
-    private String source;
     private String pack;
     
-    public Artifact(Integer id, String name, Project project, String source, String pack){
+    public Artifact(Integer id, String name, Project project, String pack){
         this.id = id;
         this.name = name;
         this.project = project;
-        this.source = source;
         this.pack = pack;
     }
     
-    public Artifact(String name, Project project, String source, String pack){
+    public Artifact(String name, Project project, String pack){
         this.name = name;
         this.project = project;
-        this.source = source;
         this.pack = pack;
     }
     
@@ -38,10 +35,6 @@ public abstract class Artifact {
     
     public Project getProject(){
         return this.project;
-    }
-    
-    public String getSource(){
-        return this.source;
     }
     
     public String getPack(){

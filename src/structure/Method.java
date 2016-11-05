@@ -14,15 +14,18 @@ import metrics.MetricMethod;
  */
 public class Method extends Artifact{
     
+    private String source;
     private HashMap<MetricMethod, Double> metrics;
     
     public Method(Integer id, String name, Project project, String source, String pack){
-        super(id, name, project, source, pack);
+        super(id, name, project, pack);
+        this.source = source;
         initilizeMetrics();
     }
     
     public Method(String name, Project project, String source, String pack){
-        super(name, project, source, pack);
+        super(name, project, pack);
+        this.source = source;
         initilizeMetrics();
     }
     
@@ -41,6 +44,10 @@ public class Method extends Artifact{
     public void updateValueMetric(String metric, Double value) {
         this.metrics.remove(MetricMethod.valueOf(metric.toUpperCase()));
         this.metrics.put(MetricMethod.valueOf(metric.toUpperCase()), value);
+    }
+    
+    public String getSource(){
+        return this.source;
     }
     
 }

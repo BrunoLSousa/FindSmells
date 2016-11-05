@@ -10,8 +10,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import structure.DetectionStrategy;
+import structure.dao.DetectionStrategyDAO;
 
 /**
  *
@@ -107,7 +110,7 @@ public class DBConnection {
         Connection connection = null;
         PreparedStatement ps = null;
         String sql = "CREATE TABLE IF NOT EXISTS detection_strategy(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-                + "name VARCHAR(100) NOT NULL, expression TEXT NOT NULL)";
+                + "name VARCHAR(100) NOT NULL, granularity VARCHAR(20) NOT NULL, expression TEXT NOT NULL, flag INTEGER DEFAULT '0')";
         try {
             connection = getConnection();
             ps = connection.prepareStatement(sql);
@@ -177,7 +180,7 @@ public class DBConnection {
         Connection connection = null;
         PreparedStatement ps = null;
         String sql = "CREATE TABLE IF NOT EXISTS measure_package(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-                + "project INTEGER NOT NULL, name VARCHAR(500), source VARCHAR(500), package VARCHAR(500), ca DOUBLE DEFAULT '-1',"
+                + "project INTEGER NOT NULL, name VARCHAR(500), package VARCHAR(500), ca DOUBLE DEFAULT '-1',"
                 + "ce DOUBLE DEFAULT '-1', noc DOUBLE DEFAULT '-1', noi DOUBLE DEFAULT '-1', rma DOUBLE DEFAULT '-1', "
                 + "rmd DOUBLE DEFAULT '-1', rmi DOUBLE DEFAULT '-1', FOREIGN KEY (project) REFERENCES project(id))";
         try {
@@ -207,17 +210,76 @@ public class DBConnection {
         }
     }
 
-    private static void insertTeste() {
+    private static void insertDetectionStrategyGodClass() {
         Connection connection = null;
         PreparedStatement ps = null;
-
         try {
-            connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("INSERT INTO project(name) VALUES(?)");
-            ps.setString(1, "teste");
+            connection = getConnection();
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('God Class', 'Type', "
+                    + "'(lcom > 0.725 AND wmc > 34 AND nof > 8 AND nom > 14)', '1')");
             ps.executeUpdate();
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+
+    private static void insertDetectionStrategyLongMethod() {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = getConnection();
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Long Method', 'Method', "
+                    + "'(mloc > 30 AND vg > 4 AND nbd > 3)', '1')");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+
+    private static void insertDetectionStrategyDataClass() {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = getConnection();
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Data Class', 'Type', "
+                    + "'(nsc <= 1 AND dit <= 2 AND nof > 3)', '1')");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+
+    private static void insertDetectionStrategyFeatureEnvy() {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = getConnection();
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Feature Envy', 'Type', "
+                    + "'(lcom > 0.725)', '1')");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+
+    private static void insertDetectionStrategyRefusedBequest() {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = getConnection();
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Refused Bequest', 'Type', "
+                    + "'(six > 0.019)', '1')");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             DBConnection.closeConnection(connection, ps);
         }
@@ -233,25 +295,17 @@ public class DBConnection {
         createTableMeasureMethod();
         createTableMeasurePackage();
         createTableMeasureProject();
+        insertDetectionStrategies();
     }
 
-    public static void main(String[] args) {
-        DBConnection.createDataBase();
-
-        Connection connection = null;
-        PreparedStatement ps = null;
-
-        try {
-            connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT * FROM project");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") + "      " + rs.getString("name"));
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            DBConnection.closeConnection(connection, ps);
+    private static void insertDetectionStrategies() {
+        List<DetectionStrategy> detections = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
+        if (detections.isEmpty()) {
+            insertDetectionStrategyDataClass();
+            insertDetectionStrategyFeatureEnvy();
+            insertDetectionStrategyGodClass();
+            insertDetectionStrategyLongMethod();
+            insertDetectionStrategyRefusedBequest();
         }
     }
 

@@ -45,7 +45,7 @@ public class CycleDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT MAX(id) FROM cycle");
+            ps = connection.prepareStatement("SELECT MAX(id) as id FROM cycle");
             ResultSet rs = ps.executeQuery();
             rs.next();
             int idCycle = rs.getInt("id");
@@ -59,7 +59,8 @@ public class CycleDAO implements DAO{
     }
 
     public int register(Cycle cycle) {
-        register(cycle);
+        Object object = (Object) cycle;
+        register(object);
         int id = getLastID();
         return id;
     }

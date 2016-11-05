@@ -5,6 +5,8 @@
  */
 package structure;
 
+import metrics.Granulatiry;
+
 /**
  *
  * @author bruno
@@ -13,16 +15,19 @@ public class DetectionStrategy {
     
     private Integer id;
     private String name;
+    private Granulatiry granularity;
     private String expression;
 
-    public DetectionStrategy(String name, String expression) {
+    public DetectionStrategy(String name, Granulatiry granularity, String expression) {
         this.name = name;
+        this.granularity = granularity;
         this.expression = expression;
     }
 
-    public DetectionStrategy(Integer id, String name, String expression) {
+    public DetectionStrategy(Integer id, String name, Granulatiry granularity, String expression) {
         this.id = id;
         this.name = name;
+        this.granularity = granularity;
         this.expression = expression;
     }
     
@@ -40,6 +45,10 @@ public class DetectionStrategy {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Granulatiry getGranularity(){
+        return this.granularity;
     }
     
 }

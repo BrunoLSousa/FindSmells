@@ -5,6 +5,7 @@
  */
 package view;
 
+import connection.DBConnection;
 import filter.Filter;
 import java.io.File;
 import java.nio.file.Path;
@@ -19,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import structure.DetectionStrategy;
 import structure.Project;
 import structure.dao.DAO;
+import structure.dao.DetectionStrategyDAO;
 import structure.dao.ProjectDAO;
 
 /**
@@ -31,6 +33,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
      * Creates new form FIlterSystemForm
      */
     public FIlterSystemForm() {
+        DBConnection.createDataBase();
         initComponents();
         this.xmlFiles = new HashSet<>();
     }
@@ -87,6 +90,11 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         selectDetectionStrategies();
 
         jButtonFilter.setText("Filter");
+        jButtonFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFilterSystemLayout = new javax.swing.GroupLayout(jPanelFilterSystem);
         jPanelFilterSystem.setLayout(jPanelFilterSystemLayout);
@@ -102,13 +110,13 @@ public class FIlterSystemForm extends javax.swing.JFrame {
                         .addComponent(jLabelProject)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxDetectionStrategy, 0, 235, Short.MAX_VALUE)
+                    .addComponent(jComboBoxDetectionStrategy, 0, 320, Short.MAX_VALUE)
                     .addComponent(jComboBoxProject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(118, 118, 118))
-            .addGroup(jPanelFilterSystemLayout.createSequentialGroup()
-                .addGap(219, 219, 219)
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFilterSystemLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonFilter)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(246, 246, 246))
         );
         jPanelFilterSystemLayout.setVerticalGroup(
             jPanelFilterSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +243,11 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItemExit);
 
         jMenuBar.add(jMenu1);
@@ -294,7 +307,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
         c.setDialogTitle("Open schedule file");
         c.setFileFilter(xmlfilter);
-        c.showOpenDialog(this);  
+        c.showOpenDialog(this);
         File[] files = c.getSelectedFiles();
 
         try {
@@ -323,12 +336,30 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCleanTextAreaActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
-        filter.convertFiles();
-        finish();
+        if (!xmlFiles.isEmpty() && !jTextFieldNameProject.getText().isEmpty()) {
+            Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
+            filter.convertFiles();
+            finish();
+        } else {
+            JOptionPane.showMessageDialog(this, "Make sure that the field \"Project\" is completed and there is at least one selected file!", "Attention", JOptionPane.WARNING_MESSAGE, null);
+        }
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
-    private void finish(){
+    private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
+        if(!jComboBoxProject.getSelectedItem().equals("There aren't projects recorded!") && !jComboBoxDetectionStrategy.getSelectedItem().equals("There aren't detection strategies recorded!")){
+            
+        } else{
+            JOptionPane.showMessageDialog(this, "Verify if there is any project and detection strategy recorded!", "Attention", JOptionPane.WARNING_MESSAGE, null);
+        }
+//        System.out.println(this.jComboBoxProject.getSelectedItem());
+//        System.out.println(this.jComboBoxDetectionStrategy.getSelectedItem());
+    }//GEN-LAST:event_jButtonFilterActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void finish() {
         selectProjects();
         selectDetectionStrategies();
         this.xmlFiles.clear();
@@ -337,7 +368,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         System.out.println("Operation was successful!");
         JOptionPane.showMessageDialog(this, "Operation was successful!");
     }
-    
+
     private void selectProjects() {
         DAO dao = new ProjectDAO();
         List<Project> projects = (List<Project>) dao.selectAll();
@@ -352,9 +383,9 @@ public class FIlterSystemForm extends javax.swing.JFrame {
             this.jComboBoxProject.setModel(combo);
         }
     }
-    
+
     private void selectDetectionStrategies() {
-        DAO dao = new ProjectDAO();
+        DAO dao = new DetectionStrategyDAO();
         List<DetectionStrategy> detectionStrategies = (List<DetectionStrategy>) dao.selectAll();
         DefaultComboBoxModel combo = new DefaultComboBoxModel();
         if (detectionStrategies.size() > 0) {
@@ -368,7 +399,6 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * @param args the command line arguments
      */

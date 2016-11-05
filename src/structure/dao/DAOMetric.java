@@ -5,6 +5,9 @@
  */
 package structure.dao;
 
+import structure.DetectionStrategy;
+import structure.Project;
+
 /**
  *
  * @author bruno
@@ -12,5 +15,7 @@ package structure.dao;
 public interface DAOMetric extends DAO{
     
     public Object selectByObject(Object object);
+    
+    public Object applyDetectionStrategy(DetectionStrategy detectionStrategy, Project project);
     
 }

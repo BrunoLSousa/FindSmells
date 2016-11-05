@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metrics.MetricPackage;
+import structure.DetectionStrategy;
 import structure.Package;
+import structure.Project;
 
 /**
  *
@@ -30,14 +32,13 @@ public class PackageDAO implements DAOMetric {
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("INSERT INTO measure_package(project, name, source, package, ca, ce, noc, noi, rma, rmd, rmi) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = connection.prepareStatement("INSERT INTO measure_package(project, name, package, ca, ce, noc, noi, rma, rmd, rmi) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setInt(1, pack.getProject().getId());
             ps.setString(2, pack.getName());
-            ps.setString(3, pack.getSource());
-            ps.setString(4, pack.getPack());
-            int index = 5;
+            ps.setString(3, pack.getPack());
+            int index = 4;
             for (MetricPackage metric : MetricPackage.values()) {
-                ps.setDouble(index, pack.getValueMetric(metric));
+                ps.setObject(index, pack.getValueMetric(metric));
                 index++;
             }
             ps.executeUpdate();
@@ -55,14 +56,13 @@ public class PackageDAO implements DAOMetric {
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("UPDATE measure_package SET project=?, name=?, source=?, package=?, ca=?, ce=?, noc=?, noi=?, rma=?, rmd=?, rmi=? WHERE id=?");
+            ps = connection.prepareStatement("UPDATE measure_package SET project=?, name=?, package=?, ca=?, ce=?, noc=?, noi=?, rma=?, rmd=?, rmi=? WHERE id=?");
             ps.setInt(1, pack.getProject().getId());
             ps.setString(2, pack.getName());
-            ps.setString(3, pack.getSource());
-            ps.setString(4, pack.getPack());
-            int index = 5;
+            ps.setString(3, pack.getPack());
+            int index = 4;
             for (MetricPackage metric : MetricPackage.values()) {
-                ps.setDouble(index, pack.getValueMetric(metric));
+                ps.setObject(index, pack.getValueMetric(metric));
                 index++;
             }
             ps.setInt(index, pack.getId());
@@ -97,7 +97,56 @@ public class PackageDAO implements DAOMetric {
             ResultSet rs = ps.executeQuery();
             List<Package> packages = new ArrayList<>();
             while (rs.next()) {
-                pack.setId(rs.getInt("id"));
+                Package p = new Package(rs.getString("name"), pack.getProject(), rs.getString("package"));
+                p.setId(rs.getInt("id"));
+                for (MetricPackage metric : MetricPackage.values()) {
+                    String nameMetric = metric.toString().toLowerCase();
+                    p.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
+                }
+                packages.add(p);
+            }
+            return packages;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return null;
+    }
+
+    private String createQuerySelectByObject(Package pack) {
+        String sql = "SELECT * FROM measure_package WHERE ";
+        sql = (pack.getName() == null) ? (sql + "name is NULL AND ") : (sql + "name=? AND ");
+        sql = (pack.getPack() == null) ? (sql + "package is NULL AND project=?") : (sql + "package=? AND project=?");
+        return sql;
+    }
+
+    private PreparedStatement assignAttributeInQuery(PreparedStatement ps, Package pack) throws SQLException {
+        int index = 1;
+        if (pack.getName() != null) {
+            ps.setObject(index, pack.getName());
+            index++;
+        }
+        if (pack.getPack() != null) {
+            ps.setObject(index, pack.getPack());
+            index++;
+        }
+        ps.setInt(index, pack.getProject().getId());
+        return ps;
+    }
+    
+    @Override
+    public Object applyDetectionStrategy(DetectionStrategy detectionStrategy, Project project) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("SELECT * FROM measure_package WHERE (" + detectionStrategy.getExpression() + ") AND project=?");
+            ps.setInt(1, project.getId());
+            ResultSet rs = ps.executeQuery();
+            List<Package> packages = new ArrayList<>();
+            while (rs.next()) {
+                Package pack = new Package(rs.getInt("id"), rs.getString("name"), project, rs.getString("package"));
                 for (MetricPackage metric : MetricPackage.values()) {
                     String nameMetric = metric.toString().toLowerCase();
                     pack.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
@@ -111,32 +160,6 @@ public class PackageDAO implements DAOMetric {
             DBConnection.closeConnection(connection, ps);
         }
         return null;
-    }
-
-    private String createQuerySelectByObject(Package pack) {
-        String sql = "SELECT * FROM measure_pack WHERE ";
-        sql = (pack.getName() == null) ? (sql + "name is NULL AND ") : (sql + "name=? AND ");
-        sql = (pack.getSource() == null) ? (sql + "source is NULL AND ") : (sql + "source=? AND ");
-        sql = (pack.getPack() == null) ? (sql + "package is NULL AND project=?") : (sql + "package=? AND project=?");
-        return sql;
-    }
-
-    private PreparedStatement assignAttributeInQuery(PreparedStatement ps, Package pack) throws SQLException {
-        int index = 1;
-        if (pack.getName() != null) {
-            ps.setObject(index, pack.getName());
-            index++;
-        }
-        if (pack.getSource() != null) {
-            ps.setObject(index, pack.getSource());
-            index++;
-        }
-        if (pack.getPack() != null) {
-            ps.setObject(index, pack.getPack());
-            index++;
-        }
-        ps.setInt(index, pack.getProject().getId());
-        return ps;
     }
 
 }

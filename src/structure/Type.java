@@ -14,15 +14,18 @@ import metrics.MetricClass;
  */
 public class Type extends Artifact{
     
+    private String source;
     private HashMap<MetricClass, Double> metrics;
     
     public Type(Integer id, String name, Project project, String source, String pack){
-        super(id, name, project, source, pack);
+        super(id, name, project, pack);
+        this.source = source;
         initilizeMetrics();
     }
     
     public Type(String name, Project project, String source, String pack){
-        super(name, project, source, pack);
+        super(name, project, pack);
+        this.source = source;
         initilizeMetrics();
     }
     
@@ -41,6 +44,10 @@ public class Type extends Artifact{
     
     public Double getValueMetric(MetricClass metric){
         return this.metrics.get(metric);
+    }
+    
+    public String getSource(){
+        return this.source;
     }
     
 }

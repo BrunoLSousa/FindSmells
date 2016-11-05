@@ -46,7 +46,7 @@ public class ProjectDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT MAX(id) FROM project");
+            ps = connection.prepareStatement("SELECT MAX(id) as id FROM project");
             ResultSet rs = ps.executeQuery();
             rs.next();
             int idProject = rs.getInt(1);
@@ -60,7 +60,8 @@ public class ProjectDAO implements DAO{
     }
 
     public int register(Project project) {
-        register(project);
+        Object object = (Object) project;
+        register(object);
         int id = getLastID();
         return id;
     }
@@ -96,7 +97,7 @@ public class ProjectDAO implements DAO{
             ps.setInt(1, project.getId());
             int index = 2;
             for(MetricProject metric : MetricProject.values()){
-                ps.setDouble(index, project.getMetricProject(metric));
+                ps.setObject(index, project.getMetricProject(metric));
                 index++;
             }
             ps.executeUpdate();
@@ -116,7 +117,7 @@ public class ProjectDAO implements DAO{
             ps.setInt(1, project.getId());
             int index = 1;
             for(MetricProject metric : MetricProject.values()){
-                ps.setDouble(index, project.getMetricProject(metric));
+                ps.setObject(index, project.getMetricProject(metric));
                 index++;
             }
             ps.setInt(index, project.getId());

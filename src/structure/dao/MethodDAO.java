@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metrics.MetricMethod;
+import structure.DetectionStrategy;
 import structure.Method;
+import structure.Project;
 
 /**
  *
@@ -36,12 +38,13 @@ public class MethodDAO implements DAOMetric{
             ResultSet rs = ps.executeQuery();
             List<Method> methods = new ArrayList<>();
             while (rs.next()) {
-                method.setId(rs.getInt("id"));
+                Method m = new Method(rs.getString("name"), method.getProject(), rs.getString("source"), rs.getString("package"));
+                m.setId(rs.getInt("id"));
                 for (MetricMethod metric : MetricMethod.values()) {
                     String nameMetric = metric.toString().toLowerCase();
-                    method.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
+                    m.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
                 }
-                methods.add(method);
+                methods.add(m);
             }
             return methods;
         } catch (ClassNotFoundException | SQLException ex) {
@@ -66,7 +69,7 @@ public class MethodDAO implements DAOMetric{
             ps.setString(4, method.getPack());
             int index = 5;
             for (MetricMethod metric : MetricMethod.values()) {
-                ps.setDouble(index, method.getValueMetric(metric));
+                ps.setObject(index, method.getValueMetric(metric));
                 index++;
             }
             ps.executeUpdate();
@@ -91,7 +94,7 @@ public class MethodDAO implements DAOMetric{
             ps.setString(4, method.getPack());
             int index = 5;
             for (MetricMethod metric : MetricMethod.values()) {
-                ps.setDouble(index, method.getValueMetric(metric));
+                ps.setObject(index, method.getValueMetric(metric));
                 index++;
             }
             ps.setInt(index, method.getId());
@@ -137,6 +140,33 @@ public class MethodDAO implements DAOMetric{
         }
         ps.setInt(index, method.getProject().getId());
         return ps;
+    }
+    
+    @Override
+    public Object applyDetectionStrategy(DetectionStrategy detectionStrategy, Project project) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("SELECT * FROM measure_method WHERE (" + detectionStrategy.getExpression() + ") AND project=?");
+            ps.setInt(1, project.getId());
+            ResultSet rs = ps.executeQuery();
+            List<Method> methods = new ArrayList<>();
+            while (rs.next()) {
+                Method method = new Method(rs.getInt("id"), rs.getString("name"), project, rs.getString("source"), rs.getString("package"));
+                for (MetricMethod metric : MetricMethod.values()) {
+                    String nameMetric = metric.toString().toLowerCase();
+                    method.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
+                }
+                methods.add(method);
+            }
+            return methods;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return null;
     }
     
 }

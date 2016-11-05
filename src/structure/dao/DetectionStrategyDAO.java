@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import metrics.Granulatiry;
+import structure.Artifact;
 import structure.DetectionStrategy;
 import structure.Project;
+import structure.Type;
 
 /**
  *
@@ -81,11 +84,11 @@ public class DetectionStrategyDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("SELECT * FROM project");
+            ps = connection.prepareStatement("SELECT * FROM detection_strategy");
             ResultSet rs = ps.executeQuery();
             List<DetectionStrategy> detectionStrategies = new ArrayList<>();
             while (rs.next()) {
-                DetectionStrategy detectionStrategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), rs.getString("expression"));
+                DetectionStrategy detectionStrategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), Granulatiry.valueOf(rs.getString("granularity")), rs.getString("expression"));
                 detectionStrategies.add(detectionStrategy);
             }
             return detectionStrategies;
@@ -108,7 +111,7 @@ public class DetectionStrategyDAO implements DAO{
             ResultSet rs = ps.executeQuery();
             DetectionStrategy detectionStrategy = null;
             if (rs.next()) {
-                detectionStrategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), rs.getString("expression"));
+                detectionStrategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), Granulatiry.valueOf(rs.getString("granularity")), rs.getString("expression"));
             }
             return detectionStrategy;
         } catch (ClassNotFoundException | SQLException ex) {
