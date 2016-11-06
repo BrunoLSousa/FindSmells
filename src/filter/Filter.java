@@ -51,14 +51,14 @@ public class Filter {
 
     public void convertFiles() {
         try {
+            int idProject = new ProjectDAO().register(this.project);
+            this.project.setId(idProject);
             for (File f : this.files) {
                 Document doc = this.builder.build(f);
                 Element root = doc.getRootElement();
                 List element = root.getChildren();
                 Iterator i = element.iterator();
                 System.out.println("Conversão " + this.project.getName() + " - " + root.getAttributeValue("scope") + " iniciada !");
-                int idProject = new ProjectDAO().register(this.project);
-                this.project.setId(idProject);
                 converterProject(i);
                 System.out.println("Conversão " + project.getName() + "finalizada !\n");
             }
@@ -122,24 +122,24 @@ public class Filter {
             List<Package> packs = (List<Package>) dao.selectByObject(pack);
             if (packs.size() > 0) {
                 for (Package p : packs) {
-                    if(p.getValueMetric(MetricPackage.valueOf(nameMetric.toUpperCase())) == -1.0){
+                    if (p.getValueMetric(MetricPackage.valueOf(nameMetric.toUpperCase())) == -1.0) {
                         pack = p;
                         break;
-                    }else{
+                    } else {
                         pack = null;
                     }
                 }
                 if (pack != null) {
-                    pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    pack.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.update(pack);
                 } else {
                     pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("package"));
-                    pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    pack.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.register(pack);
                 }
             } else {
                 pack = new Package(el.getAttributeValue("name"), project, el.getAttributeValue("package"));
-                pack.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                pack.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(pack);
             }
             System.out.println(cont);
@@ -156,24 +156,24 @@ public class Filter {
             List<Method> methods = (List<Method>) dao.selectByObject(method);
             if (methods.size() > 0) {
                 for (Method m : methods) {
-                    if(m.getValueMetric(MetricMethod.valueOf(nameMetric.toUpperCase())) == -1.0){
+                    if (m.getValueMetric(MetricMethod.valueOf(nameMetric.toUpperCase())) == -1.0) {
                         method = m;
                         break;
-                    }else{
+                    } else {
                         method = null;
                     }
                 }
                 if (method != null) {
-                    method.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    method.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.update(method);
                 } else {
                     method = new Method(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
-                    method.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    method.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.register(method);
                 }
             } else {
                 method = new Method(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
-                method.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                method.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(method);
             }
             System.out.println(cont);
@@ -191,24 +191,24 @@ public class Filter {
             List<Type> types = (List<Type>) dao.selectByObject(type);
             if (types.size() > 0) {
                 for (Type t : types) {
-                    if(t.getValueMetric(MetricClass.valueOf(nameMetric.toUpperCase())) == -1.0){
+                    if (t.getValueMetric(MetricClass.valueOf(nameMetric.toUpperCase())) == -1.0) {
                         type = t;
                         break;
-                    }else{
+                    } else {
                         type = null;
                     }
                 }
                 if (type != null) {
-                    type.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    type.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.update(type);
                 } else {
                     type = new Type(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
-                    type.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                    type.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                     dao.register(type);
                 }
             } else {
                 type = new Type(el.getAttributeValue("name"), project, el.getAttributeValue("source"), el.getAttributeValue("package"));
-                type.updateValueMetric(nameMetric, Double.parseDouble(el.getAttributeValue("value")));
+                type.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(type);
             }
         }

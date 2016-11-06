@@ -49,6 +49,15 @@ public abstract class Artifact {
         return this.id;
     }
     
+    public void updateValueMetric(String metric, String value) {
+        try {
+            Double val = Double.parseDouble(value);
+            updateValueMetric(metric, val);
+        } catch (Exception e) {
+            //chama o log aqui.
+        }
+    }
+    
     public abstract void updateValueMetric(String metric, Double value);
     
 //    public abstract void register(Artifact artifact);
