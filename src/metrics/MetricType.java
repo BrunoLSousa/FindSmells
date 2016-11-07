@@ -9,6 +9,6 @@ package metrics;
  *
  * @author bruno
  */
-public enum MetricClass {
+public enum MetricType {
     DIT, LCOM, NOF, NOM, NORM, NSC, NSF, NSM, SIX, WMC;
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import metrics.MetricClass;
+import metrics.MetricType;
 import structure.DetectionStrategy;
 import structure.Project;
 import structure.Type;
@@ -40,7 +40,7 @@ public class TypeDAO implements DAOMetric {
             while (rs.next()) {
                 Type t = new Type(rs.getString("name"), type.getProject(), rs.getString("source"), rs.getString("package"));
                 t.setId(rs.getInt("id"));
-                for (MetricClass metric : MetricClass.values()) {
+                for (MetricType metric : MetricType.values()) {
                     String nameMetric = metric.toString().toLowerCase();
                     t.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
                 }
@@ -68,7 +68,7 @@ public class TypeDAO implements DAOMetric {
             ps.setString(3, type.getSource());
             ps.setString(4, type.getPack());
             int index = 5;
-            for (MetricClass metric : MetricClass.values()) {
+            for (MetricType metric : MetricType.values()) {
                 ps.setObject(index, type.getValueMetric(metric));
                 index++;
             }
@@ -93,7 +93,7 @@ public class TypeDAO implements DAOMetric {
             ps.setString(3, type.getSource());
             ps.setString(4, type.getPack());
             int index = 5;
-            for (MetricClass metric : MetricClass.values()) {
+            for (MetricType metric : MetricType.values()) {
                 ps.setObject(index, type.getValueMetric(metric));
                 index++;
             }
@@ -154,7 +154,7 @@ public class TypeDAO implements DAOMetric {
             List<Type> types = new ArrayList<>();
             while (rs.next()) {
                 Type type = new Type(rs.getInt("id"), rs.getString("name"), project, rs.getString("source"), rs.getString("package"));
-                for (MetricClass metric : MetricClass.values()) {
+                for (MetricType metric : MetricType.values()) {
                     String nameMetric = metric.toString().toLowerCase();
                     type.updateValueMetric(nameMetric, rs.getDouble(nameMetric));
                 }

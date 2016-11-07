@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import metrics.MetricClass;
+import metrics.MetricType;
 import metrics.MetricMethod;
 import metrics.MetricPackage;
 import structure.Package;
@@ -191,7 +191,7 @@ public class Filter {
             List<Type> types = (List<Type>) dao.selectByObject(type);
             if (types.size() > 0) {
                 for (Type t : types) {
-                    if (t.getValueMetric(MetricClass.valueOf(nameMetric.toUpperCase())) == -1.0) {
+                    if (t.getValueMetric(MetricType.valueOf(nameMetric.toUpperCase())) == -1.0) {
                         type = t;
                         break;
                     } else {

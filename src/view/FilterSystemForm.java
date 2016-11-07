@@ -10,7 +10,7 @@ import filter.Filter;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
@@ -23,7 +23,6 @@ import structure.Project;
 import structure.dao.DAO;
 import structure.dao.DetectionStrategyDAO;
 import structure.dao.ProjectDAO;
-import structure.Type;
 import structure.dao.MethodDAO;
 import structure.dao.PackageDAO;
 import structure.dao.TypeDAO;
@@ -32,15 +31,15 @@ import structure.dao.TypeDAO;
  *
  * @author bruno
  */
-public class FIlterSystemForm extends javax.swing.JFrame {
+public class FilterSystemForm extends javax.swing.JFrame {
 
     /**
      * Creates new form FIlterSystemForm
      */
-    public FIlterSystemForm() {
+    public FilterSystemForm() {
         DBConnection.createDataBase();
         initComponents();
-        this.xmlFiles = new HashSet<>();
+        this.xmlFiles = new LinkedHashSet<>();
     }
 
     /**
@@ -72,6 +71,8 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         jButtonCleanTextArea = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemLog = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuTool = new javax.swing.JMenu();
         jMenuItemCreateDetectionStrategy = new javax.swing.JMenuItem();
@@ -247,6 +248,15 @@ public class FIlterSystemForm extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
+        jMenuItemLog.setText("Vizualize Logs");
+        jMenuItemLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLogActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemLog);
+        jMenu1.add(jSeparator1);
+
         jMenuItemExit.setText("Exit");
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,6 +383,11 @@ public class FIlterSystemForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
+    private void jMenuItemLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogActionPerformed
+        LogsForm logs = new LogsForm();
+        logs.setVisible(true);
+    }//GEN-LAST:event_jMenuItemLogActionPerformed
+
     private void finish() {
         selectProjects();
         selectDetectionStrategies();
@@ -430,20 +445,21 @@ public class FIlterSystemForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FIlterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FilterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FIlterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FilterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FIlterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FilterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FIlterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FilterSystemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FIlterSystemForm().setVisible(true);
+                new FilterSystemForm().setVisible(true);
             }
         });
     }
@@ -465,6 +481,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCreateDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemLog;
     private javax.swing.JMenuItem jMenuItemRemoveDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemUpdateThreshold;
     private javax.swing.JMenu jMenuTool;
@@ -472,6 +489,7 @@ public class FIlterSystemForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelRegisterProject;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextArea jTextAreaXmlFiles;
     private javax.swing.JTextField jTextFieldNameProject;
     // End of variables declaration//GEN-END:variables

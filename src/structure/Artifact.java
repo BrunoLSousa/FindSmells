@@ -5,6 +5,8 @@
  */
 package structure;
 
+import structure.log.Log;
+
 /**
  *
  * @author bruno
@@ -54,18 +56,11 @@ public abstract class Artifact {
             Double val = Double.parseDouble(value);
             updateValueMetric(metric, val);
         } catch (Exception e) {
-            //chama o log aqui.
+            Log log = new Log(this, metric);
+            log.writeLogCharacterInvalid();
         }
     }
     
     public abstract void updateValueMetric(String metric, Double value);
-    
-//    public abstract void register(Artifact artifact);
-//    
-//    public abstract void update(Artifact artifact);
-//    
-//    public abstract Artifact select(String name, String );
-//    
-//    public abstract Artifact selectAll();
     
 }

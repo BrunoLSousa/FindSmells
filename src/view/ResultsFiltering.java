@@ -12,8 +12,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import metrics.Granulatiry;
 import structure.Method;
-import structure.Project;
-import structure.Type;
 import structure.dao.MethodDAO;
 import structure.dao.PackageDAO;
 import structure.dao.TypeDAO;

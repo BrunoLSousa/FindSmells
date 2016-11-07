@@ -6,7 +6,7 @@
 package structure;
 
 import java.util.HashMap;
-import metrics.MetricClass;
+import metrics.MetricType;
 
 /**
  *
@@ -15,7 +15,7 @@ import metrics.MetricClass;
 public class Type extends Artifact{
     
     private String source;
-    private HashMap<MetricClass, Double> metrics;
+    private HashMap<MetricType, Double> metrics;
     
     public Type(Integer id, String name, Project project, String source, String pack){
         super(id, name, project, pack);
@@ -31,18 +31,18 @@ public class Type extends Artifact{
     
     private void initilizeMetrics(){
         this.metrics = new HashMap<>();
-        for(MetricClass metric : MetricClass.values()){
+        for(MetricType metric : MetricType.values()){
             this.metrics.put(metric, -1.0);
         }
     }
 
     @Override
     public void updateValueMetric(String metric, Double value) {
-        this.metrics.remove(MetricClass.valueOf(metric.toUpperCase()));
-        this.metrics.put(MetricClass.valueOf(metric.toUpperCase()), value);
+        this.metrics.remove(MetricType.valueOf(metric.toUpperCase()));
+        this.metrics.put(MetricType.valueOf(metric.toUpperCase()), value);
     }
     
-    public Double getValueMetric(MetricClass metric){
+    public Double getValueMetric(MetricType metric){
         return this.metrics.get(metric);
     }
     

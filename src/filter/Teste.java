@@ -5,16 +5,26 @@
  */
 package filter;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import metrics.Granulatiry;
+import metrics.MetricMethod;
 import metrics.MetricPackage;
-import metrics.MetricProject;
 import structure.DetectionStrategy;
+import structure.Method;
 import structure.Project;
-import structure.Type;
-import structure.dao.TypeDAO;
+import structure.dao.LogDAO;
+import structure.log.Log;
 
 /**
  *
@@ -27,11 +37,27 @@ public class Teste {
         DetectionStrategy detection = new DetectionStrategy(1, "God Class", Granulatiry.Type, "(wmc > 30 AND nof > 5 AND nom > 2) OR (lcom >= 0.265 AND nof > 3)");
         Project project = new Project(1, "Webmail");
         
-        List<Type> types = (List<Type>) new TypeDAO().applyDetectionStrategy(detection, project);
+        List<Log> logs = (List<Log>) new LogDAO().selectAll();
         
-        for(Type t : types){
-            System.out.printf("%-30s  %-30s  %-30s\n", t.getName(), t.getSource(), t.getPack());
-        }
+//        for(Log l : logs){
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            System.out.printf("%-10s  %-10s  %-20s %-20s  %-10s  %-20s %-10s  %-10s\n", l.getId(), l.getArtifact().getProject().getName(), l.getArtifact().getName(), l.getArtifact().getPack(), l.getMetric(), l.getSubject(), l.getMessage(), dateFormat.format(l.getDate()));
+//        }
+        List<String> strs = new ArrayList<>();
+        strs.add("Ovo");
+        strs.add("Abacaxi");
+        strs.add("Maçã");
+        System.out.println(strs.toString());
+        
+//        log.printLog();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+//        Collections.sort(strs);
+//        System.out.println(strs.toString());
+        System.out.println(cal.getTime());
+        
+        
+        
         
 //        List<MetricPackage> list = (List<MetricPackage>) teste();
 //        
