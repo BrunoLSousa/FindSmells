@@ -68,7 +68,7 @@ public class LogsForm extends javax.swing.JFrame {
         jLabelHighlighter = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
 
-        setTitle("Logs");
+        setTitle("FindSmells");
         setResizable(false);
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Logs"));
@@ -234,7 +234,7 @@ public class LogsForm extends javax.swing.JFrame {
                 .addComponent(jPanelLogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonExport)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

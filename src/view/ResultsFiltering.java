@@ -51,7 +51,7 @@ public class ResultsFiltering extends javax.swing.JFrame {
         jTableResults = new javax.swing.JTable();
         jButtonExportCsv = new javax.swing.JButton();
 
-        setTitle("Results of Filtering");
+        setTitle("FindSmells");
         setPreferredSize(new java.awt.Dimension(927, 500));
         setResizable(false);
 

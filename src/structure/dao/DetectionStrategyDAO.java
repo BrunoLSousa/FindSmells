@@ -15,10 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metrics.Granulatiry;
-import structure.Artifact;
 import structure.DetectionStrategy;
-import structure.Project;
-import structure.Type;
 
 /**
  *
@@ -33,9 +30,10 @@ public class DetectionStrategyDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, expression) VALUES(?, ?)");
+            ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression) VALUES(?, ?, ?)");
             ps.setString(1, detectionStrategy.getName());
-            ps.setString(2, detectionStrategy.getExpression());
+            ps.setString(2, detectionStrategy.getGranularity().toString());
+            ps.setString(3, detectionStrategy.getExpression());
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,10 +49,11 @@ public class DetectionStrategyDAO implements DAO{
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("UPDATE detection_strategy SET name=?, expression=? WHERE id=?");
+            ps = connection.prepareStatement("UPDATE detection_strategy SET name=?, granularity=?, expression=? WHERE id=?");
             ps.setString(1, detectionStrategy.getName());
-            ps.setString(2, detectionStrategy.getExpression());
-            ps.setInt(3, detectionStrategy.getId());
+            ps.setString(2, detectionStrategy.getGranularity().toString());
+            ps.setString(3, detectionStrategy.getExpression());
+            ps.setInt(4, detectionStrategy.getId());
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);

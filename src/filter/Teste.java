@@ -5,6 +5,9 @@
  */
 package filter;
 
+import com.fathzer.soft.javaluator.BracketPair;
+import com.fathzer.soft.javaluator.DoubleEvaluator;
+import com.fathzer.soft.javaluator.Parameters;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -33,49 +36,33 @@ import structure.log.Log;
 public class Teste {
     
     public static void main(String[] args) {
-        
-        DetectionStrategy detection = new DetectionStrategy(1, "God Class", Granulatiry.Type, "(wmc > 30 AND nof > 5 AND nom > 2) OR (lcom >= 0.265 AND nof > 3)");
-        Project project = new Project(1, "Webmail");
-        
-        List<Log> logs = (List<Log>) new LogDAO().selectAll();
-        
-//        for(Log l : logs){
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            System.out.printf("%-10s  %-10s  %-20s %-20s  %-10s  %-20s %-10s  %-10s\n", l.getId(), l.getArtifact().getProject().getName(), l.getArtifact().getName(), l.getArtifact().getPack(), l.getMetric(), l.getSubject(), l.getMessage(), dateFormat.format(l.getDate()));
-//        }
-        List<String> strs = new ArrayList<>();
-        strs.add("Ovo");
-        strs.add("Abacaxi");
-        strs.add("Maçã");
-        System.out.println(strs.toString());
-        
-//        log.printLog();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-//        Collections.sort(strs);
-//        System.out.println(strs.toString());
-        System.out.println(cal.getTime());
-        
-        
-        
-        
-//        List<MetricPackage> list = (List<MetricPackage>) teste();
-//        
-//        for(MetricPackage m : list){
-//            System.out.println(m.toString());
-//        }
-        
-        
-//        for(MetricPackage metric : MetricPackage.values()){
-//            System.out.println(metric.toString());
-//        }
-        
+    // Let's create a double evaluator that only support +,-,*,and / operators, with no constants,
+    // and no functions. The default parenthesis will be allowed
+    // First create empty evaluator parameters
+    Parameters params = new Parameters();
+    // Add the supported operators to these parameters
+    params.add(DoubleEvaluator.PLUS);
+    params.add(DoubleEvaluator.MINUS);
+    params.add(DoubleEvaluator.MULTIPLY);
+    params.add(DoubleEvaluator.DIVIDE);
+    params.add(DoubleEvaluator.NEGATE);
+    // Add the default expression brackets
+    params.addExpressionBracket(BracketPair.PARENTHESES);
+    // Create the restricted evaluator
+    DoubleEvaluator evaluator = new DoubleEvaluator(params);
+ 
+    // Let's try some expressions
+    doIt(evaluator, "(3*-4)+2");
+    doIt(evaluator, "3^2");
+    doIt(evaluator, "ln(5)");
+  }
+ 
+  private static void doIt(DoubleEvaluator evaluator, String expression) {
+    try {
+      System.out.println (expression+" = "+evaluator.evaluate(expression));
+    } catch (IllegalArgumentException e) {
+      System.out.println (expression+" is an invalid expression");
     }
-    
-    public static Object teste(){
-        List<MetricPackage> list = new ArrayList<>();
-        list.addAll(Arrays.asList(MetricPackage.values()));
-        return list;
-    }
+  }
     
 }

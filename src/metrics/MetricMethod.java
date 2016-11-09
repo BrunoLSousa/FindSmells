@@ -11,4 +11,13 @@ package metrics;
  */
 public enum MetricMethod {
     MLOC, NBD, PAR, VG;
+    
+    public static boolean contains(String metric){
+        for(MetricMethod m : MetricMethod.values()){
+            if(m.toString().toLowerCase().equals(metric)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

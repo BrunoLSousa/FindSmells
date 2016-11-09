@@ -11,4 +11,14 @@ package metrics;
  */
 public enum MetricPackage {
     CA, CE, NOC, NOI, RMA, RMD, RMI;
+    
+    public static boolean contains(String metric){
+        for(MetricPackage m : MetricPackage.values()){
+            if(m.toString().toLowerCase().equals(metric)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

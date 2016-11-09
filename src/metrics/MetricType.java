@@ -11,4 +11,14 @@ package metrics;
  */
 public enum MetricType {
     DIT, LCOM, NOF, NOM, NORM, NSC, NSF, NSM, SIX, WMC;
+    
+    public static boolean contains(String metric){
+        for(MetricType m : MetricType.values()){
+            if(m.toString().toLowerCase().equals(metric)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

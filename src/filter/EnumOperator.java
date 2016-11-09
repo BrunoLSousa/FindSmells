@@ -3,20 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package structure.dao;
+package filter;
 
 /**
  *
  * @author bruno
  */
-public interface DAO {
-    
-    public void register(Object object);
-    
-    public void update(Object object);
-    
-    public Object selectAll();
-    
-    public Object selectById(Integer id);
+public enum EnumOperator {
+    OPEN_PARENTHESIS, CLOSE_PARENTHESIS, EXPRESSION, LOGIC_OPERATOR, METRIC, VALUE, SMALLER, LARGER, SMALLER_EQUAL, LARGER_EQUAL, EQUAL;
     
 }

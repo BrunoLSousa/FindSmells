@@ -309,7 +309,8 @@ public class FilterSystemForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCreateDetectionStrategyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateDetectionStrategyActionPerformed
-        // TODO add your handling code here:
+        CreateDetectionStrategy frame = new CreateDetectionStrategy(this);
+        frame.setVisible(true);
     }//GEN-LAST:event_jMenuItemCreateDetectionStrategyActionPerformed
 
     private void jMenuItemUpdateThresholdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateThresholdActionPerformed
@@ -350,16 +351,6 @@ public class FilterSystemForm extends javax.swing.JFrame {
         this.jTextAreaXmlFiles.setText("");
     }//GEN-LAST:event_jButtonCleanTextAreaActionPerformed
 
-    private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        if (!xmlFiles.isEmpty() && !jTextFieldNameProject.getText().isEmpty()) {
-            Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
-            filter.convertFiles();
-            finish();
-        } else {
-            JOptionPane.showMessageDialog(this, "Make sure that the field \"Project\" is completed and there is at least one selected file!", "Attention", JOptionPane.WARNING_MESSAGE, null);
-        }
-    }//GEN-LAST:event_jButtonDoneActionPerformed
-
     private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
         if(!jComboBoxProject.getSelectedItem().equals("There aren't projects recorded!") && !jComboBoxDetectionStrategy.getSelectedItem().equals("There aren't detection strategies recorded!")){
             List<DetectionStrategy> detections = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
@@ -379,6 +370,10 @@ public class FilterSystemForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonFilterActionPerformed
 
+    public void refreshDetectionStrategies(){
+        selectDetectionStrategies();
+    }
+    
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
@@ -387,6 +382,16 @@ public class FilterSystemForm extends javax.swing.JFrame {
         LogsForm logs = new LogsForm();
         logs.setVisible(true);
     }//GEN-LAST:event_jMenuItemLogActionPerformed
+
+    private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
+        if (!xmlFiles.isEmpty() && !jTextFieldNameProject.getText().isEmpty()) {
+            Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
+            filter.convertFiles();
+            finish();
+        } else {
+            JOptionPane.showMessageDialog(this, "Make sure that the field \"Project\" is completed and there is at least one selected file!", "Attention", JOptionPane.WARNING_MESSAGE, null);
+        }
+    }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private void finish() {
         selectProjects();
