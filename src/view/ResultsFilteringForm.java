@@ -20,7 +20,7 @@ import structure.dao.TypeDAO;
  *
  * @author bruno
  */
-public class ResultsFiltering extends javax.swing.JFrame {
+public class ResultsFilteringForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ResultsFiltering
@@ -28,7 +28,7 @@ public class ResultsFiltering extends javax.swing.JFrame {
      * @param artefactsWithBadSmells
      * @param granularity
      */
-    public ResultsFiltering(Object artefactsWithBadSmells, Granulatiry granularity) {
+    public ResultsFilteringForm(Object artefactsWithBadSmells, Granulatiry granularity) {
         this.artefactsWithBadSmells = artefactsWithBadSmells;
         this.granularity = granularity;
         initComponents();
@@ -52,7 +52,6 @@ public class ResultsFiltering extends javax.swing.JFrame {
         jButtonExportCsv = new javax.swing.JButton();
 
         setTitle("FindSmells");
-        setPreferredSize(new java.awt.Dimension(927, 500));
         setResizable(false);
 
         jPanelResults.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

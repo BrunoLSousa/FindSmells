@@ -309,7 +309,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCreateDetectionStrategyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateDetectionStrategyActionPerformed
-        CreateDetectionStrategy frame = new CreateDetectionStrategy(this);
+        CreateDetectionStrategyForm frame = new CreateDetectionStrategyForm(this);
         frame.setVisible(true);
     }//GEN-LAST:event_jMenuItemCreateDetectionStrategyActionPerformed
 
@@ -363,7 +363,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
             }else{
                 artefactsWithBadSmells = new PackageDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
             }
-            ResultsFiltering results = new ResultsFiltering(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity());
+            ResultsFilteringForm results = new ResultsFilteringForm(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity());
             results.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(this, "Verify if there is any project and detection strategy recorded!", "Attention", JOptionPane.WARNING_MESSAGE, null);

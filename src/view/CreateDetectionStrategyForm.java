@@ -18,25 +18,25 @@ import metrics.MetricType;
  *
  * @author bruno
  */
-public class CreateDetectionStrategy extends javax.swing.JFrame {
+public class CreateDetectionStrategyForm extends javax.swing.JFrame {
 
     /**
      * Creates new form CreateDetectionStrategy
      */
-    public CreateDetectionStrategy() {
+    public CreateDetectionStrategyForm() {
         initComponents();
         initPanels();
         loadVariablesToValue();
     }
 
-    public CreateDetectionStrategy(FilterSystemForm frame) {
+    public CreateDetectionStrategyForm(FilterSystemForm frame) {
         this.frame = frame;
         initComponents();
         initPanels();
         loadVariablesToValue();
     }
 
-    public CreateDetectionStrategy(String name, String granularity, String expression, FilterSystemForm frame) {
+    public CreateDetectionStrategyForm(String name, String granularity, String expression, FilterSystemForm frame) {
         initComponents();
         initPanels(granularity);
         loadVariablesToValue();
@@ -835,7 +835,7 @@ public class CreateDetectionStrategy extends javax.swing.JFrame {
             String expression = this.jTextAreaDetectionStrategy.getText();
             Evaluator evaluator = new Evaluator();
             if (evaluator.evaluate(expression)) {
-                PutThreshold putThreshold = new PutThreshold(this.jTextFieldNameDetectionStrategy.getText(), this.granularity, expression, this.frame);
+                PutThresholdForm putThreshold = new PutThresholdForm(this.jTextFieldNameDetectionStrategy.getText(), this.granularity, expression, this.frame);
                 putThreshold.setVisible(true);
                 this.setVisible(false);
             } else {

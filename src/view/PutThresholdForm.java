@@ -27,7 +27,7 @@ import structure.dao.DetectionStrategyDAO;
  *
  * @author bruno
  */
-public class PutThreshold extends javax.swing.JFrame {
+public class PutThresholdForm extends javax.swing.JFrame {
 
     /**
      * Creates new form PutThreshold
@@ -36,7 +36,7 @@ public class PutThreshold extends javax.swing.JFrame {
      * @param granularity
      * @param expression
      */
-    public PutThreshold(String nameDetectionStrategy, String granularity, String expression, FilterSystemForm mainScreen) {
+    public PutThresholdForm(String nameDetectionStrategy, String granularity, String expression, FilterSystemForm mainScreen) {
         this.nameDetectionStrategy = nameDetectionStrategy;
         this.granularity = granularity;
         this.expression = expression;
@@ -158,14 +158,14 @@ public class PutThreshold extends javax.swing.JFrame {
             dao.register(detectionStrategy);
             JOptionPane.showMessageDialog(this, "Detection strategy successfully registered!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
             this.mainScreen.refreshDetectionStrategies();
-            CreateDetectionStrategy frame = new CreateDetectionStrategy();
+            CreateDetectionStrategyForm frame = new CreateDetectionStrategyForm();
             frame.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
-        CreateDetectionStrategy createDetectionStrategy = new CreateDetectionStrategy(nameDetectionStrategy, granularity, expression, this.mainScreen);
+        CreateDetectionStrategyForm createDetectionStrategy = new CreateDetectionStrategyForm(nameDetectionStrategy, granularity, expression, this.mainScreen);
         createDetectionStrategy.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonBackActionPerformed
