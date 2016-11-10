@@ -314,7 +314,8 @@ public class FilterSystemForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCreateDetectionStrategyActionPerformed
 
     private void jMenuItemUpdateThresholdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateThresholdActionPerformed
-        // TODO add your handling code here:
+        UpdateThresholdForm updateThresholdForm = new UpdateThresholdForm(this);
+        updateThresholdForm.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateThresholdActionPerformed
 
     private void jButtonSelectXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectXMLActionPerformed
@@ -363,7 +364,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
             }else{
                 artefactsWithBadSmells = new PackageDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
             }
-            ResultsFilteringForm results = new ResultsFilteringForm(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity());
+            ResultsFilteringForm results = new ResultsFilteringForm(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity(), projects.get(this.jComboBoxProject.getSelectedIndex()));
             results.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(this, "Verify if there is any project and detection strategy recorded!", "Attention", JOptionPane.WARNING_MESSAGE, null);

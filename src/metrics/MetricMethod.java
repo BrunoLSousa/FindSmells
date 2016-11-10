@@ -20,4 +20,13 @@ public enum MetricMethod {
         }
         return false;
     }
+    
+    public static boolean verifyInString(String metric){
+        for(MetricMethod m : MetricMethod.values()){
+            if(metric.contains(m.toString().toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

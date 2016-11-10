@@ -21,4 +21,13 @@ public enum MetricType {
         return false;
     }
     
+    public static boolean verifyInString(String metric){
+        for(MetricType m : MetricType.values()){
+            if(metric.contains(m.toString().toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

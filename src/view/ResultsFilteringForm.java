@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import metrics.Granulatiry;
 import structure.Method;
+import structure.Project;
 import structure.dao.MethodDAO;
 import structure.dao.PackageDAO;
 import structure.dao.TypeDAO;
@@ -27,10 +28,12 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
      *
      * @param artefactsWithBadSmells
      * @param granularity
+     * @param project
      */
-    public ResultsFilteringForm(Object artefactsWithBadSmells, Granulatiry granularity) {
+    public ResultsFilteringForm(Object artefactsWithBadSmells, Granulatiry granularity, Project project) {
         this.artefactsWithBadSmells = artefactsWithBadSmells;
         this.granularity = granularity;
+        this.project = project;
         initComponents();
     }
 
@@ -144,15 +147,15 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     private void updateLabelResult(){
         if(granularity.equals(Granulatiry.Type)){
             List<structure.Type> types = (List<structure.Type>) artefactsWithBadSmells;
-            int total = new TypeDAO().totalArtifacts(types.get(0).getProject());
+            int total = new TypeDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(types.size() + " of " + total + " classes.");
         }else if(granularity.equals(Granulatiry.Method)){
             List<Method> methods = (List<Method>) artefactsWithBadSmells;
-            int total = new MethodDAO().totalArtifacts(methods.get(0).getProject());
+            int total = new MethodDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(methods.size() + " of " + total + " methods.");
         }else {
             List<structure.Package> packages = (List<structure.Package>) artefactsWithBadSmells;
-            int total = new PackageDAO().totalArtifacts(packages.get(0).getProject());
+            int total = new PackageDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(packages.size() + " of " + total + " packages.");
         }
     }
@@ -247,4 +250,5 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private Object artefactsWithBadSmells;
     private Granulatiry granularity;
+    private Project project;
 }

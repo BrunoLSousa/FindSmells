@@ -64,6 +64,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
         jScrollPanePutThreshold = new javax.swing.JScrollPane();
 
         setTitle("FindSmells");
+        setResizable(false);
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

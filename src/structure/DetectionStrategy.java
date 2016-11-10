@@ -46,6 +46,10 @@ public class DetectionStrategy {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
     
     public Granulatiry getGranularity(){
         return this.granularity;
