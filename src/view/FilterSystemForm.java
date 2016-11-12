@@ -79,6 +79,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jMenuItemUpdateThreshold = new javax.swing.JMenuItem();
         jMenuItemRemoveDetectionStrategy = new javax.swing.JMenuItem();
         jMenuItemRemoveProject = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemHelp = new javax.swing.JMenuItem();
+        jMenuItemMetricsCatalog = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemAboutFindSmells = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FindSmells");
@@ -304,6 +309,20 @@ public class FilterSystemForm extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuTool);
 
+        jMenu2.setText("About");
+
+        jMenuItemHelp.setText("Help");
+        jMenu2.add(jMenuItemHelp);
+
+        jMenuItemMetricsCatalog.setText("Metrics Catalog");
+        jMenu2.add(jMenuItemMetricsCatalog);
+        jMenu2.add(jSeparator2);
+
+        jMenuItemAboutFindSmells.setText("About FindSmells");
+        jMenu2.add(jMenuItemAboutFindSmells);
+
+        jMenuBar.add(jMenu2);
+
         setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -512,10 +531,14 @@ public class FilterSystemForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelProject;
     private javax.swing.JLabel jLabelXmlSelected;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItemAboutFindSmells;
     private javax.swing.JMenuItem jMenuItemCreateDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemLog;
+    private javax.swing.JMenuItem jMenuItemMetricsCatalog;
     private javax.swing.JMenuItem jMenuItemRemoveDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemRemoveProject;
     private javax.swing.JMenuItem jMenuItemUpdateThreshold;
@@ -525,6 +548,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelRegisterProject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTextArea jTextAreaXmlFiles;
     private javax.swing.JTextField jTextFieldNameProject;
     // End of variables declaration//GEN-END:variables
