@@ -152,8 +152,9 @@ public class DetectionStrategyDAO implements DAO {
         }
         if (!granularity.equals("None")) {
             sql += connector + " granularity='" + granularity + "' ";
+            connector = "AND";
         }
-        sql += "ORDER BY name ASC";
+        sql += connector + " flag='0' ORDER BY name ASC";
         return sql;
     }
     
@@ -171,5 +172,5 @@ public class DetectionStrategyDAO implements DAO {
             DBConnection.closeConnection(connection, ps);
         }
     }
-
+    
 }

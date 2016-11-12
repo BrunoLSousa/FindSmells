@@ -25,14 +25,13 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
 
     /**
      * Creates new form RemoveForm
+     *
      * @param mainScreen
      */
-    
     public RemoveDetectionStrategyForm(FilterSystemForm mainScreen) {
         this.mainScreen = mainScreen;
-        this.detectionStrategies = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
         initComponents();
-        selectGranularit();
+        updatePages();
         verifyStateButtons();
         updateHighlighter();
     }
@@ -146,9 +145,10 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             }
         });
         jTableDetectionStrategies.setUpdateSelectionOnSort(false);
-        updatePages();
-        tableResults();
         jScrollPane1.setViewportView(jTableDetectionStrategies);
+        selectGranularit();
+        this.detectionStrategies = (List<DetectionStrategy>) new DetectionStrategyDAO().selectDetectionStrategiesByFilter(jTextFieldNameDetectionStrategy.getText(), jComboBoxGranularity.getSelectedItem().toString());
+        tableResults();
 
         jButtonPrevious.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
         jButtonPrevious.setText("<<");
@@ -297,13 +297,13 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
         update();
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
-    private void update(){        
+    private void update() {
         changeNameButtonSelect();
         tableResults();
         verifyStateButtons();
         updateHighlighter();
     }
-    
+
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
         if (!this.selectedAll) {
             for (int i = 0; i < jTableDetectionStrategies.getRowCount(); i++) {
@@ -354,8 +354,8 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             jScrollPane1.setViewportView(emptyLabel);
         }
     }
-    
-    private void changeNameButtonSelect(){
+
+    private void changeNameButtonSelect() {
         if (this.selectedAll) {
             this.jButtonSelect.setText("Deselect All");
         } else {
@@ -444,7 +444,7 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
     private List<DetectionStrategy> detectionStrategies;
     private FilterSystemForm mainScreen;
     private boolean selectedAll = false;
-    private static final int LIMIT = 2;
+    private static final int LIMIT = 20;
     private int pageCurrent = 1;
     private int pages;
 }
