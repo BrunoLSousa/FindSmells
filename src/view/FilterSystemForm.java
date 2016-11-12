@@ -286,6 +286,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jMenuTool.add(jMenuItemUpdateThreshold);
 
         jMenuItemRemoveDetectionStrategy.setText("Remove Detection Strategy");
+        jMenuItemRemoveDetectionStrategy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRemoveDetectionStrategyActionPerformed(evt);
+            }
+        });
         jMenuTool.add(jMenuItemRemoveDetectionStrategy);
 
         jMenuBar.add(jMenuTool);
@@ -393,6 +398,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Make sure that the field \"Project\" is completed and there is at least one selected file!", "Attention", JOptionPane.WARNING_MESSAGE, null);
         }
     }//GEN-LAST:event_jButtonDoneActionPerformed
+
+    private void jMenuItemRemoveDetectionStrategyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveDetectionStrategyActionPerformed
+        RemoveDetectionStrategyForm remove = new RemoveDetectionStrategyForm(this);
+        remove.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRemoveDetectionStrategyActionPerformed
 
     private void finish() {
         selectProjects();

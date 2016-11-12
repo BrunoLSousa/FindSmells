@@ -253,6 +253,7 @@ public class LogsForm extends javax.swing.JFrame {
 
     private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
         this.logs = new LogDAO().selectLogsByFilter(projects.get(jComboBoxProject.getSelectedIndex()), ((String) jComboBoxMetric.getSelectedItem()), ((String) jComboBoxSubject.getSelectedItem()));
+        this.pageCurrent = 1;
         updatePages();
         tableResults();
         verifyStateButtons();
@@ -450,5 +451,5 @@ public class LogsForm extends javax.swing.JFrame {
     private List<Log> logs;
     private int pages;
     private int pageCurrent = 1;
-    private static final int LIMIT = 20;
+    private static final int LIMIT = 1;
 }

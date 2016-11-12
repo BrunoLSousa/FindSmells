@@ -21,7 +21,7 @@ import structure.DetectionStrategy;
  *
  * @author bruno
  */
-public class DetectionStrategyDAO implements DAO{
+public class DetectionStrategyDAO implements DAO {
 
     @Override
     public void register(Object object) {
@@ -61,8 +61,8 @@ public class DetectionStrategyDAO implements DAO{
             DBConnection.closeConnection(connection, ps);
         }
     }
-    
-    public void delete(Integer id){
+
+    public void delete(Integer id) {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
@@ -120,5 +120,56 @@ public class DetectionStrategyDAO implements DAO{
         }
         return null;
     }
+
+    public List<DetectionStrategy> selectDetectionStrategiesByFilter(String detectionStrategy, String granularity) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = createSqlFilter(detectionStrategy, granularity);
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<DetectionStrategy> detectionStrategies = new ArrayList<>();
+            while (rs.next()) {
+                DetectionStrategy strategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), Granulatiry.valueOf(rs.getString("granularity")), rs.getString("expression"));
+                detectionStrategies.add(strategy);
+            }
+            return detectionStrategies;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return null;
+    }
+
+    private String createSqlFilter(String detectionStrategy, String granularity) {
+        String sql = "SELECT * FROM detection_strategy ";
+        String connector = "WHERE";
+        if (!detectionStrategy.isEmpty()) {
+            sql += connector + " name LIKE '%" + detectionStrategy + "%' ";
+            connector = "AND";
+        }
+        if (!granularity.equals("None")) {
+            sql += connector + " granularity='" + granularity + "' ";
+        }
+        sql += "ORDER BY name ASC";
+        return sql;
+    }
     
+    public void remove(int id){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("DELETE FROM detection_strategy WHERE id=?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+
 }
