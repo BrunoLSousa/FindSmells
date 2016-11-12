@@ -373,8 +373,8 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
     }
 
     private void selectDetectionStrategies() {
-        DAO dao = new DetectionStrategyDAO();
-        List<DetectionStrategy> strategies = (List<DetectionStrategy>) dao.selectAll();
+        DetectionStrategyDAO dao = new DetectionStrategyDAO();
+        List<DetectionStrategy> strategies = (List<DetectionStrategy>) dao.selectAllAllowed();
         DefaultComboBoxModel combo = new DefaultComboBoxModel();
         this.detectionStrategies.add(new DetectionStrategy("None", null, null));
         combo.addElement("None");

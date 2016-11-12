@@ -173,4 +173,25 @@ public class DetectionStrategyDAO implements DAO {
         }
     }
     
+    public Object selectAllAllowed() {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("SELECT * FROM detection_strategy WHERE flag='0' ORDER BY name ASC");
+            ResultSet rs = ps.executeQuery();
+            List<DetectionStrategy> detectionStrategies = new ArrayList<>();
+            while (rs.next()) {
+                DetectionStrategy detectionStrategy = new DetectionStrategy(rs.getInt("id"), rs.getString("name"), Granulatiry.valueOf(rs.getString("granularity")), rs.getString("expression"));
+                detectionStrategies.add(detectionStrategy);
+            }
+            return detectionStrategies;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return null;
+    }
+    
 }
