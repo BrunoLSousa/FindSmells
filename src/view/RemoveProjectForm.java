@@ -6,29 +6,26 @@
 package view;
 
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import metrics.Granulatiry;
-import structure.DetectionStrategy;
-import structure.dao.DetectionStrategyDAO;
+import structure.Project;
+import structure.dao.ProjectDAO;
 
 /**
  *
  * @author bruno
  */
-public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
+public class RemoveProjectForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form RemoveForm
-     *
+     * Creates new form RemoveProjectForm
      * @param mainScreen
      */
-    public RemoveDetectionStrategyForm(FilterSystemForm mainScreen) {
+    public RemoveProjectForm(FilterSystemForm mainScreen) {
         this.mainScreen = mainScreen;
         initComponents();
         updatePages();
@@ -36,10 +33,6 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
         updateHighlighter();
     }
 
-//    public RemoveDetectionStrategyForm(FilterSystemForm mainScreen) {
-//        this.mainScreen = mainScreen;
-//        initComponents();
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,32 +44,25 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelFilter = new javax.swing.JPanel();
-        jLabelNameDetectionStrategy = new javax.swing.JLabel();
-        jTextFieldNameDetectionStrategy = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBoxGranularity = new javax.swing.JComboBox();
+        jLabelNameProject = new javax.swing.JLabel();
+        jTextFieldNameProject = new javax.swing.JTextField();
         jButtonFilter = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableDetectionStrategies = new javax.swing.JTable();
+        jTableProjects = new javax.swing.JTable();
         jButtonPrevious = new javax.swing.JButton();
         jButtonNext = new javax.swing.JButton();
         jLabelHighlighter = new javax.swing.JLabel();
         jButtonRemove = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FindSmells");
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
 
-        jLabelNameDetectionStrategy.setText("Name of Detection Strategy:");
-
-        jLabel1.setText("Granularity:");
-
-        jComboBoxGranularity.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabelNameProject.setText("Name of Project:");
 
         jButtonFilter.setText("Filter");
         jButtonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -91,19 +77,12 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFilterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelFilterLayout.createSequentialGroup()
-                        .addComponent(jLabelNameDetectionStrategy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNameDetectionStrategy))
-                    .addGroup(jPanelFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxGranularity, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jLabelNameProject)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldNameProject)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFilterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(319, Short.MAX_VALUE)
                 .addComponent(jButtonFilter)
                 .addGap(274, 274, 274))
         );
@@ -112,20 +91,16 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             .addGroup(jPanelFilterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNameDetectionStrategy)
-                    .addComponent(jTextFieldNameDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBoxGranularity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                    .addComponent(jLabelNameProject)
+                    .addComponent(jTextFieldNameProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(jButtonFilter)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("DetectionStrategies"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Projects"));
 
-        jTableDetectionStrategies.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProjects.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -144,10 +119,9 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTableDetectionStrategies.setUpdateSelectionOnSort(false);
-        jScrollPane1.setViewportView(jTableDetectionStrategies);
-        selectGranularit();
-        this.detectionStrategies = (List<DetectionStrategy>) new DetectionStrategyDAO().selectDetectionStrategiesByFilter(jTextFieldNameDetectionStrategy.getText(), jComboBoxGranularity.getSelectedItem().toString());
+        jTableProjects.setUpdateSelectionOnSort(false);
+        jScrollPane1.setViewportView(jTableProjects);
+        this.projects = (List<Project>) new ProjectDAO().selectProjectsByFilter(jTextFieldNameProject.getText());
         tableResults();
 
         jButtonPrevious.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
@@ -195,7 +169,7 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
                     .addComponent(jButtonPrevious)
                     .addComponent(jButtonNext)
                     .addComponent(jLabelHighlighter))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jButtonRemove.setText("Remove");
@@ -232,9 +206,9 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRemove)
                     .addComponent(jButtonSelect))
@@ -251,11 +225,26 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
+        this.projects = new ProjectDAO().selectProjectsByFilter(this.jTextFieldNameProject.getText());
+        this.selectedAll = false;
+        this.pageCurrent = 1;
+        updatePages();
+        update();
+    }//GEN-LAST:event_jButtonFilterActionPerformed
+
+    private void jButtonPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreviousActionPerformed
+        this.selectedAll = false;
+        this.pageCurrent--;
+        update();
+        this.jButtonNext.setEnabled(true);
+    }//GEN-LAST:event_jButtonPreviousActionPerformed
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         this.selectedAll = false;
@@ -264,6 +253,48 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
         this.jButtonPrevious.setEnabled(true);
     }//GEN-LAST:event_jButtonNextActionPerformed
 
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
+        ProjectDAO dao = new ProjectDAO();
+        for (int i = 0; i < jTableProjects.getRowCount(); i++) {
+            Boolean chked = Boolean.valueOf(jTableProjects.getValueAt(i, 0).toString());
+            if (chked) {
+                int start = (LIMIT * (this.pageCurrent - 1));
+                Project project = this.projects.get(start + i);
+                dao.remove(project.getId());
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Projects successfully deleted!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        this.projects = new ProjectDAO().selectProjectsByFilter(this.jTextFieldNameProject.getText());
+        this.mainScreen.refreshProjects();
+        this.selectedAll = false;
+        this.pageCurrent = 1;
+        updatePages();
+        update();
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
+
+    private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
+        if (!this.selectedAll) {
+            for (int i = 0; i < jTableProjects.getRowCount(); i++) {
+                jTableProjects.setValueAt(true, i, 0);
+            }
+            this.selectedAll = true;
+            changeNameButtonSelect();
+        } else {
+            for (int i = 0; i < jTableProjects.getRowCount(); i++) {
+                jTableProjects.setValueAt(false, i, 0);
+            }
+            this.selectedAll = false;
+            changeNameButtonSelect();
+        }
+    }//GEN-LAST:event_jButtonSelectActionPerformed
+
+    private void update() {
+        changeNameButtonSelect();
+        tableResults();
+        verifyStateButtons();
+        updateHighlighter();
+    }
+    
     private void verifyStateButtons() {
         if (this.pageCurrent == this.pages) {
             this.jButtonNext.setEnabled(false);
@@ -276,79 +307,22 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
             this.jButtonPrevious.setEnabled(true);
         }
     }
-
-    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
-        DetectionStrategyDAO dao = new DetectionStrategyDAO();
-        for (int i = 0; i < jTableDetectionStrategies.getRowCount(); i++) {
-            Boolean chked = Boolean.valueOf(jTableDetectionStrategies.getValueAt(i, 0).toString());
-            if (chked) {
-                int start = (LIMIT * (this.pageCurrent - 1));
-                DetectionStrategy strategy = this.detectionStrategies.get(start + i);
-                dao.remove(strategy.getId());
-            }
-        }
-        JOptionPane.showMessageDialog(this, "Detection strategies successfully deleted!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-        this.detectionStrategies = new DetectionStrategyDAO().selectDetectionStrategiesByFilter(this.jTextFieldNameDetectionStrategy.getText(), (String) this.jComboBoxGranularity.getSelectedItem());
-        this.mainScreen.refreshDetectionStrategies();
-        this.selectedAll = false;
-        this.pageCurrent = 1;
-        updatePages();
-        update();
-    }//GEN-LAST:event_jButtonRemoveActionPerformed
-
-    private void update() {
-        changeNameButtonSelect();
-        tableResults();
-        verifyStateButtons();
-        updateHighlighter();
-    }
-
-    private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
-        if (!this.selectedAll) {
-            for (int i = 0; i < jTableDetectionStrategies.getRowCount(); i++) {
-                jTableDetectionStrategies.setValueAt(true, i, 0);
-            }
-            this.selectedAll = true;
-            changeNameButtonSelect();
-        } else {
-            for (int i = 0; i < jTableDetectionStrategies.getRowCount(); i++) {
-                jTableDetectionStrategies.setValueAt(false, i, 0);
-            }
-            this.selectedAll = false;
-            changeNameButtonSelect();
-        }
-    }//GEN-LAST:event_jButtonSelectActionPerformed
-
-    private void jButtonPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreviousActionPerformed
-        this.selectedAll = false;
-        this.pageCurrent--;
-        update();
-        this.jButtonNext.setEnabled(true);
-    }//GEN-LAST:event_jButtonPreviousActionPerformed
-
-    private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
-        this.detectionStrategies = new DetectionStrategyDAO().selectDetectionStrategiesByFilter(this.jTextFieldNameDetectionStrategy.getText(), (String) this.jComboBoxGranularity.getSelectedItem());
-        this.selectedAll = false;
-        this.pageCurrent = 1;
-        updatePages();
-        update();
-    }//GEN-LAST:event_jButtonFilterActionPerformed
-
+    
     private void tableResults() {
-        if (!this.detectionStrategies.isEmpty()) {
+        if (!this.projects.isEmpty()) {
             DefaultTableModel model = getColumns();
             model = getData(model);
-            jTableDetectionStrategies = new JTable();
-            jTableDetectionStrategies.setModel(model);
-            jTableDetectionStrategies.setShowGrid(true);
+            jTableProjects = new JTable();
+            jTableProjects.setModel(model);
+            jTableProjects.setShowGrid(true);
             DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
             cellRender.setHorizontalAlignment(SwingConstants.CENTER);
-            jTableDetectionStrategies.getColumnModel().getColumn(0).setMaxWidth(100);
-            ((DefaultTableCellRenderer) jTableDetectionStrategies.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-            jTableDetectionStrategies.getTableHeader().setReorderingAllowed(false);
-            jScrollPane1.setViewportView(jTableDetectionStrategies);
+            jTableProjects.getColumnModel().getColumn(0).setMaxWidth(100);
+            ((DefaultTableCellRenderer) jTableProjects.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+            jTableProjects.getTableHeader().setReorderingAllowed(false);
+            jScrollPane1.setViewportView(jTableProjects);
         } else {
-            JLabel emptyLabel = new JLabel("There aren't detection strategies for this filter!!!");
+            JLabel emptyLabel = new JLabel("There aren't projects for this filter!!!");
             emptyLabel.setHorizontalAlignment(SwingConstants.CENTER);
             jScrollPane1.setViewportView(emptyLabel);
         }
@@ -365,11 +339,10 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
     private DefaultTableModel getData(DefaultTableModel model) {
         int start = (LIMIT * pageCurrent) - LIMIT;
         int i = 0;
-        while (((i + start) < this.detectionStrategies.size()) && (i < LIMIT)) {
+        while (((i + start) < this.projects.size()) && (i < LIMIT)) {
             model.addRow(new Object[0]);
             model.setValueAt(selectedAll, i, 0);
-            model.setValueAt(this.detectionStrategies.get(i + start).getName(), i, 1);
-            model.setValueAt(this.detectionStrategies.get(i + start).getGranularity().toString(), i, 2);
+            model.setValueAt(this.projects.get(i + start).getName(), i, 1);
             i++;
         }
         return model;
@@ -383,16 +356,13 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
                         return Boolean.class;
                     case 1:
                         return String.class;
-                    case 2:
-                        return String.class;
                     default:
                         return String.class;
                 }
             }
         };
         model.addColumn("Select");
-        model.addColumn("Name of Detection Strategy");
-        model.addColumn("Granularity");
+        model.addColumn("Name of Project");
         return model;
     }
 
@@ -401,24 +371,15 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
     }
 
     private void updatePages() {
-        if (!detectionStrategies.isEmpty()) {
-            if ((this.detectionStrategies.size() % LIMIT) == 0) {
-                pages = (this.detectionStrategies.size() / LIMIT);
+        if (!projects.isEmpty()) {
+            if ((this.projects.size() % LIMIT) == 0) {
+                pages = (this.projects.size() / LIMIT);
             } else {
-                pages = (this.detectionStrategies.size() / LIMIT) + 1;
+                pages = (this.projects.size() / LIMIT) + 1;
             }
         } else {
             pages = 1;
         }
-    }
-
-    private void selectGranularit() {
-        DefaultComboBoxModel combo = new DefaultComboBoxModel();
-        combo.addElement("None");
-        for (Granulatiry g : Granulatiry.values()) {
-            combo.addElement(g.toString());
-        }
-        jComboBoxGranularity.setModel(combo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -427,18 +388,16 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrevious;
     private javax.swing.JButton jButtonRemove;
     private javax.swing.JButton jButtonSelect;
-    private javax.swing.JComboBox jComboBoxGranularity;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelHighlighter;
-    private javax.swing.JLabel jLabelNameDetectionStrategy;
+    private javax.swing.JLabel jLabelNameProject;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelFilter;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableDetectionStrategies;
-    private javax.swing.JTextField jTextFieldNameDetectionStrategy;
+    private javax.swing.JTable jTableProjects;
+    private javax.swing.JTextField jTextFieldNameProject;
     // End of variables declaration//GEN-END:variables
-    private List<DetectionStrategy> detectionStrategies;
+    private List<Project> projects;
     private FilterSystemForm mainScreen;
     private boolean selectedAll = false;
     private static final int LIMIT = 20;

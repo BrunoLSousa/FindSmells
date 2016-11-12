@@ -147,7 +147,7 @@ public class ProjectDAO implements DAO{
         }
     }
     
-    public void delete(Integer id){
+    public void remove(Integer id){
         Connection connection = null;
         PreparedStatement ps = null;
         try {
@@ -204,6 +204,38 @@ public class ProjectDAO implements DAO{
             DBConnection.closeConnection(connection, ps);
         }
         return null;
+    }
+    
+    public List<Project> selectProjectsByFilter(String nameProject) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = createSqlFilter(nameProject);
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<Project> projects = new ArrayList<>();
+            while (rs.next()) {
+                Project project = new Project(rs.getInt("id"), rs.getString("name"));
+                projects.add(project);
+            }
+            return projects;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+        return null;
+    }
+
+    private String createSqlFilter(String nameProject) {
+        String sql = "SELECT * FROM project ";
+        String connector = "WHERE";
+        if (!nameProject.isEmpty()) {
+            sql += connector + " name LIKE '%" + nameProject + "%' ";
+        }
+        sql += " ORDER BY name ASC";
+        return sql;
     }
 
 }

@@ -78,6 +78,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jMenuItemCreateDetectionStrategy = new javax.swing.JMenuItem();
         jMenuItemUpdateThreshold = new javax.swing.JMenuItem();
         jMenuItemRemoveDetectionStrategy = new javax.swing.JMenuItem();
+        jMenuItemRemoveProject = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FindSmells");
@@ -293,6 +294,14 @@ public class FilterSystemForm extends javax.swing.JFrame {
         });
         jMenuTool.add(jMenuItemRemoveDetectionStrategy);
 
+        jMenuItemRemoveProject.setText("Remove Project");
+        jMenuItemRemoveProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRemoveProjectActionPerformed(evt);
+            }
+        });
+        jMenuTool.add(jMenuItemRemoveProject);
+
         jMenuBar.add(jMenuTool);
 
         setJMenuBar(jMenuBar);
@@ -379,6 +388,10 @@ public class FilterSystemForm extends javax.swing.JFrame {
     public void refreshDetectionStrategies(){
         selectDetectionStrategies();
     }
+
+    public void refreshProjects(){
+        selectProjects();
+    }
     
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
@@ -403,6 +416,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
         RemoveDetectionStrategyForm remove = new RemoveDetectionStrategyForm(this);
         remove.setVisible(true);
     }//GEN-LAST:event_jMenuItemRemoveDetectionStrategyActionPerformed
+
+    private void jMenuItemRemoveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveProjectActionPerformed
+        RemoveProjectForm remove = new RemoveProjectForm(this);
+        remove.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRemoveProjectActionPerformed
 
     private void finish() {
         selectProjects();
@@ -499,6 +517,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemLog;
     private javax.swing.JMenuItem jMenuItemRemoveDetectionStrategy;
+    private javax.swing.JMenuItem jMenuItemRemoveProject;
     private javax.swing.JMenuItem jMenuItemUpdateThreshold;
     private javax.swing.JMenu jMenuTool;
     private javax.swing.JPanel jPanelFilterSystem;
