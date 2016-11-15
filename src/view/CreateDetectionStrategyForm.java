@@ -91,6 +91,8 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         jButtonSmaller = new javax.swing.JButton();
         jButtonLarger = new javax.swing.JButton();
         jButtonEquals = new javax.swing.JButton();
+        jButtonSmallerEquals = new javax.swing.JButton();
+        jButtonLargerEquals = new javax.swing.JButton();
         jPanelDetectionStrategy = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDetectionStrategy = new javax.swing.JTextArea();
@@ -395,7 +397,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addGroup(jPanelTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSIX)
                     .addComponent(jButtonWMC))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanelOperators.setBorder(javax.swing.BorderFactory.createTitledBorder("Operators"));
@@ -456,6 +458,20 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             }
         });
 
+        jButtonSmallerEquals.setText("<=");
+        jButtonSmallerEquals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSmallerEqualsActionPerformed(evt);
+            }
+        });
+
+        jButtonLargerEquals.setText(">=");
+        jButtonLargerEquals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLargerEqualsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelOperatorsLayout = new javax.swing.GroupLayout(jPanelOperators);
         jPanelOperators.setLayout(jPanelOperatorsLayout);
         jPanelOperatorsLayout.setHorizontalGroup(
@@ -477,6 +493,10 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addComponent(jButtonLarger)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEquals)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSmallerEquals)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLargerEquals)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelOperatorsLayout.setVerticalGroup(
@@ -490,7 +510,9 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                     .addComponent(jButtonValue)
                     .addComponent(jButtonSmaller)
                     .addComponent(jButtonLarger)
-                    .addComponent(jButtonEquals))
+                    .addComponent(jButtonEquals)
+                    .addComponent(jButtonSmallerEquals)
+                    .addComponent(jButtonLargerEquals))
                 .addGap(0, 63, Short.MAX_VALUE))
         );
 
@@ -514,7 +536,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             jPanelDetectionStrategyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetectionStrategyLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         jButtonClean.setText("Clean");
@@ -541,6 +563,9 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jPanelOperators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jPanelMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanelPackage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -553,10 +578,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                             .addGroup(jPanelMainLayout.createSequentialGroup()
                                 .addComponent(jButtonClean)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonRegister))
-                            .addGroup(jPanelMainLayout.createSequentialGroup()
-                                .addComponent(jPanelOperators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButtonRegister)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                         .addComponent(jLabelOptionDetectionStrategy)
@@ -846,6 +868,18 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
+    private void jButtonSmallerEqualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSmallerEqualsActionPerformed
+        String detectionStrategy = this.jTextAreaDetectionStrategy.getText();
+        detectionStrategy += "<=";
+        this.jTextAreaDetectionStrategy.setText(detectionStrategy);
+    }//GEN-LAST:event_jButtonSmallerEqualsActionPerformed
+
+    private void jButtonLargerEqualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLargerEqualsActionPerformed
+        String detectionStrategy = this.jTextAreaDetectionStrategy.getText();
+        detectionStrategy += ">=";
+        this.jTextAreaDetectionStrategy.setText(detectionStrategy);
+    }//GEN-LAST:event_jButtonLargerEqualsActionPerformed
+
     private void initPanels() {
         enablePanelType(true);
         enablePanelMethods(false);
@@ -930,6 +964,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEquals;
     private javax.swing.JButton jButtonLCOM;
     private javax.swing.JButton jButtonLarger;
+    private javax.swing.JButton jButtonLargerEquals;
     private javax.swing.JButton jButtonMetricMLOC;
     private javax.swing.JButton jButtonMetricNBD;
     private javax.swing.JButton jButtonMetricPAR;
@@ -950,6 +985,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRegister;
     private javax.swing.JButton jButtonSIX;
     private javax.swing.JButton jButtonSmaller;
+    private javax.swing.JButton jButtonSmallerEquals;
     private javax.swing.JButton jButtonValue;
     private javax.swing.JButton jButtonWMC;
     private javax.swing.JLabel jLabelNameDetectionStrategy;

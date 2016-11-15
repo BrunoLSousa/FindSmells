@@ -48,7 +48,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdateThreshold">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Update Threshold"/>
+                <Property name="text" type="java.lang.String" value="Update Detection Strategy"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUpdateThresholdActionPerformed"/>
@@ -79,12 +79,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHelp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Help"/>
+                <Property name="text" type="java.lang.String" value="Tutorial"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMetricsCatalog">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Metrics Catalog"/>
+                <Property name="text" type="java.lang.String" value="Threshold Catalog"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
@@ -169,7 +169,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Filtering of system"/>
+                <TitledBorder title="Bad Smells Detection"/>
               </Border>
             </Property>
           </Properties>
@@ -277,7 +277,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Register System"/>
+                <TitledBorder title="Submit System"/>
               </Border>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -362,7 +362,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonSelectXML">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Select Files XML"/>
+                <Property name="text" type="java.lang.String" value="Select XML Files"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectXMLActionPerformed"/>

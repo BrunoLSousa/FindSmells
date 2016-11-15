@@ -89,7 +89,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         setTitle("FindSmells");
         setResizable(false);
 
-        jPanelFilterSystem.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtering of system"));
+        jPanelFilterSystem.setBorder(javax.swing.BorderFactory.createTitledBorder("Bad Smells Detection"));
 
         jLabelProject.setText("Choose a Project:");
 
@@ -146,12 +146,12 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        jPanelRegisterProject.setBorder(javax.swing.BorderFactory.createTitledBorder("Register System"));
+        jPanelRegisterProject.setBorder(javax.swing.BorderFactory.createTitledBorder("Submit System"));
         jPanelRegisterProject.setMinimumSize(new java.awt.Dimension(597, 376));
 
         jLabelNameProject.setText("Project:");
 
-        jButtonSelectXML.setText("Select Files XML");
+        jButtonSelectXML.setText("Select XML Files");
         jButtonSelectXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelectXMLActionPerformed(evt);
@@ -283,7 +283,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         });
         jMenuTool.add(jMenuItemCreateDetectionStrategy);
 
-        jMenuItemUpdateThreshold.setText("Update Threshold");
+        jMenuItemUpdateThreshold.setText("Update Detection Strategy");
         jMenuItemUpdateThreshold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemUpdateThresholdActionPerformed(evt);
@@ -311,10 +311,10 @@ public class FilterSystemForm extends javax.swing.JFrame {
 
         jMenu2.setText("About");
 
-        jMenuItemHelp.setText("Help");
+        jMenuItemHelp.setText("Tutorial");
         jMenu2.add(jMenuItemHelp);
 
-        jMenuItemMetricsCatalog.setText("Metrics Catalog");
+        jMenuItemMetricsCatalog.setText("Threshold Catalog");
         jMenu2.add(jMenuItemMetricsCatalog);
         jMenu2.add(jSeparator2);
 

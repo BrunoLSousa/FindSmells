@@ -36,12 +36,14 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
     public UpdateThresholdForm() {
         this.detectionStrategies = new ArrayList<>();
         initComponents();
+        this.jButtonReset.setVisible(false);
     }
 
     public UpdateThresholdForm(FilterSystemForm frame) {
         this.detectionStrategies = new ArrayList<>();
         this.mainScreen = frame;
         initComponents();
+        this.jButtonReset.setVisible(false);
     }
 
     /**
