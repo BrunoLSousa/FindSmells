@@ -275,7 +275,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addComponent(jButtonRMI))
         );
 
-        jPanelType.setBorder(javax.swing.BorderFactory.createTitledBorder("Metrics of Type"));
+        jPanelType.setBorder(javax.swing.BorderFactory.createTitledBorder("Metrics of Class"));
 
         jButtonDIT.setText("DIT");
         jButtonDIT.addActionListener(new java.awt.event.ActionListener() {
