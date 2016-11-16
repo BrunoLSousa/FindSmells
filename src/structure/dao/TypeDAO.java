@@ -195,7 +195,7 @@ public class TypeDAO implements DAOMetric {
         PreparedStatement ps = null;
         try {
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("DELETE FROM measure_type WHERE project=?");
+            ps = connection.prepareStatement("DELETE FROM measure_class WHERE project=?");
             ps.setInt(1, idProject);
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {

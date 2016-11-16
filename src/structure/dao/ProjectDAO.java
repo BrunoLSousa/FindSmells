@@ -41,7 +41,7 @@ public class ProjectDAO implements DAO{
         }
     }
 
-    private int getLastID() {
+    public int getLastID() {
         Connection connection = null;
         PreparedStatement ps = null;
         try {

@@ -7,12 +7,15 @@ package filter;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import metrics.MetricType;
 import metrics.MetricMethod;
 import metrics.MetricPackage;
@@ -32,23 +35,30 @@ import structure.dao.MethodDAO;
 import structure.dao.PackageDAO;
 import structure.dao.ProjectDAO;
 import structure.dao.TypeDAO;
+import view.FilterSystemForm;
+import view.ProgressBarForm;
 
 /**
  *
  * @author bruno
  */
-public class Filter {
+public class Filter extends Thread{
 
     private Set<File> files;
     private SAXBuilder builder;
     private Project project;
+    private ProgressBarForm progressBar;
+    private FilterSystemForm frame;
+    
 
-    public Filter(Set<File> files, String nameProject) {
+    public Filter(Set<File> files, String nameProject, FilterSystemForm frame) {
         this.files = files;
         this.builder = new SAXBuilder();
         this.project = new Project(nameProject);
+        this.progressBar = new ProgressBarForm();
+        this.frame = frame;
     }
-
+    
     public void convertFiles() {
         try {
             int idProject = new ProjectDAO().register(this.project);
@@ -56,15 +66,48 @@ public class Filter {
             for (File f : this.files) {
                 Document doc = this.builder.build(f);
                 Element root = doc.getRootElement();
+                progressBar.initialize(getLines(root), "Converting file " + Paths.get(f.getName()) + "...");
+                incrementValue();
                 List element = root.getChildren();
                 Iterator i = element.iterator();
-                System.out.println("Conversão " + this.project.getName() + " - " + root.getAttributeValue("scope") + " iniciada !");
                 converterProject(i);
-                System.out.println("Conversão " + project.getName() + "finalizada !\n");
+                finish();
             }
+            frame.refresh();
         } catch (JDOMException | IOException ex) {
+            exception();
             Logger.getLogger(Filter.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private int getLines(Element root) {
+        List element = root.getChildren();
+        Iterator i = element.iterator();
+        int line = 0;
+        while (i.hasNext()) {
+            Element e = (Element) i.next();
+            if (e.getName().equals("Cycle")) {
+                List<Element> elements = e.getChildren();
+                line += elements.size();
+            } else if (e.getName().equals("Metric")) {
+                List<Element> elements = e.getChildren();
+                if (elements.get(0).getName().equals("Values")) {
+                    elements = elements.get(0).getChildren();
+                    line += elements.size();
+                } else if (elements.get(0).getName().equals("Value")) {
+                    line += 1;
+                }
+            }
+
+        }
+        return line;
+    }
+
+    private void exception() {
+        finish();
+        JOptionPane.showMessageDialog(null, "Could not finish converting files from this project!", "Error", JOptionPane.ERROR_MESSAGE, null);
+        int idProject = new ProjectDAO().getLastID();
+        new ProjectDAO().remove(idProject);
     }
 
     private void converterProject(Iterator i) {
@@ -74,11 +117,11 @@ public class Filter {
                 Cycle cycle = new Cycle(e.getAttributeValue("name"), this.project, Integer.parseInt(e.getAttributeValue("nodes")), Integer.parseInt(e.getAttributeValue("diameter")));
                 int idCycle = new CycleDAO().register(cycle);
                 cycle.setId(idCycle);
+                incrementValue();
                 converterDataCycle(cycle, e.getChildren());
             } else if (e.getName().equals("Metric")) {
-                System.out.println("Métrica " + e.getAttributeValue("id") + " iniciada");
+//                incrementValue();
                 converterMetrics(e.getAttributeValue("id"), e.getChildren());
-                System.out.println("\n");
             }
         }
     }
@@ -96,7 +139,6 @@ public class Filter {
     }
 
     private void converterMetricProject(String nameMetric, List<Element> elements) {
-        int cont = 1;
         for (Element el : elements) {
             HashMap<MetricProject, Double> metrics = new ProjectDAO().selectMetricsProject(project);
             MetricProject metric = MetricProject.valueOf(nameMetric.toUpperCase());
@@ -108,13 +150,11 @@ public class Filter {
             } else {
                 new ProjectDAO().updateMetricProject(project);
             }
-            System.out.println(cont);
-            cont++;
+            incrementValue();
         }
     }
 
     private void converterMetricPackage(String nameMetric, List<Element> elements) {
-        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new PackageDAO();
@@ -142,13 +182,12 @@ public class Filter {
                 pack.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(pack);
             }
-            System.out.println(cont);
-            cont++;
+
+            incrementValue();
         }
     }
 
     private void converterMetricMethod(String nameMetric, List<Element> elements) {
-        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new MethodDAO();
@@ -176,14 +215,12 @@ public class Filter {
                 method.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(method);
             }
-            System.out.println(cont);
-            cont++;
+            incrementValue();
         }
 
     }
 
     private void converterMetricType(String nameMetric, List<Element> elements) {
-        int cont = 1;
         elements = elements.get(0).getChildren();
         for (Element el : elements) {
             DAOMetric dao = new TypeDAO();
@@ -211,17 +248,41 @@ public class Filter {
                 type.updateValueMetric(nameMetric, el.getAttributeValue("value"));
                 dao.register(type);
             }
+
+            incrementValue();
         }
-        System.out.println(cont);
-        cont++;
     }
 
     private void converterDataCycle(Cycle cycle, List<Element> elements) {
-//        elements = elements.get(0).getChildren();
         for (Element el : elements) {
-//            cycle.addDataCycle(el.getContent().get(0).getValue());
             new CycleDAO().registerCycleData(cycle.getId(), el.getContent().get(0).getValue());
+            incrementValue();
         }
+    }
+
+    private void incrementValue() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if (!progressBar.isVisible()) {
+                    progressBar.setVisible(true);
+                }
+
+                progressBar.incrementValue();
+            }
+        });
+    }
+    
+    private void finish() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                progressBar.finish();
+            }
+        });
+    }
+    
+    @Override
+    public void run(){
+        convertFiles();
     }
 
 }

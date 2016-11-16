@@ -365,7 +365,6 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 long length = 0;
                 for (File f : files) {
                     this.xmlFiles.add(f);
-                    length += f.length();
                     Path path = Paths.get(f.getName());
                     if (this.jTextAreaXmlFiles.getText().equals("")) {
                         this.jTextAreaXmlFiles.setText(path.toString());
@@ -386,32 +385,32 @@ public class FilterSystemForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCleanTextAreaActionPerformed
 
     private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
-        if(!jComboBoxProject.getSelectedItem().equals("There aren't projects recorded!") && !jComboBoxDetectionStrategy.getSelectedItem().equals("There aren't detection strategies recorded!")){
+        if (!jComboBoxProject.getSelectedItem().equals("There aren't projects recorded!") && !jComboBoxDetectionStrategy.getSelectedItem().equals("There aren't detection strategies recorded!")) {
             List<DetectionStrategy> detections = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
             List<Project> projects = (List<Project>) new ProjectDAO().selectAll();
             Object artefactsWithBadSmells;
-            if(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Type)){
+            if (detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Type)) {
                 artefactsWithBadSmells = new TypeDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
-            }else if(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Method)){
+            } else if (detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Method)) {
                 artefactsWithBadSmells = new MethodDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
-            }else{
+            } else {
                 artefactsWithBadSmells = new PackageDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
             }
             ResultsFilteringForm results = new ResultsFilteringForm(artefactsWithBadSmells, detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity(), projects.get(this.jComboBoxProject.getSelectedIndex()));
             results.setVisible(true);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(this, "Verify if there is any project and detection strategy recorded!", "Attention", JOptionPane.WARNING_MESSAGE, null);
         }
     }//GEN-LAST:event_jButtonFilterActionPerformed
 
-    public void refreshDetectionStrategies(){
+    public void refreshDetectionStrategies() {
         selectDetectionStrategies();
     }
 
-    public void refreshProjects(){
+    public void refreshProjects() {
         selectProjects();
     }
-    
+
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
@@ -423,9 +422,12 @@ public class FilterSystemForm extends javax.swing.JFrame {
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
         if (!xmlFiles.isEmpty() && !jTextFieldNameProject.getText().isEmpty()) {
-            Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText());
-            filter.convertFiles();
-            finish();
+            Filter filter = new Filter(this.xmlFiles, this.jTextFieldNameProject.getText(), this);
+//            filter.convertFiles();
+            filter.start();
+//            Filter filter = Filter.getInstance();
+//            filter.convertFiles(this.xmlFiles, this.jTextFieldNameProject.getText());
+//            finish();
         } else {
             JOptionPane.showMessageDialog(this, "Make sure that the field \"Project\" is completed and there is at least one selected file!", "Attention", JOptionPane.WARNING_MESSAGE, null);
         }
@@ -441,13 +443,12 @@ public class FilterSystemForm extends javax.swing.JFrame {
         remove.setVisible(true);
     }//GEN-LAST:event_jMenuItemRemoveProjectActionPerformed
 
-    private void finish() {
+    public void refresh() {
         selectProjects();
         selectDetectionStrategies();
         this.xmlFiles.clear();
         jTextFieldNameProject.setText("");
         jTextAreaXmlFiles.setText("");
-        System.out.println("Operation was successful!");
         JOptionPane.showMessageDialog(this, "Operation was successful!");
     }
 
