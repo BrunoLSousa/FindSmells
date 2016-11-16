@@ -182,5 +182,20 @@ public class PackageDAO implements DAOMetric {
         }
         return 0;
     }
+    
+    public static void removeByIdProject(Integer idProject){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("DELETE FROM measure_package WHERE project=?");
+            ps.setInt(1, idProject);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
 
 }

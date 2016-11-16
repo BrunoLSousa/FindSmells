@@ -96,4 +96,34 @@ public class CycleDAO implements DAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public static void removeCycleDataByIdProject(int idProject){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("DELETE FROM data_cycle WHERE cycle IN (SELECT id FROM cycle WHERE project=?)");
+            ps.setInt(1, idProject);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+    
+    public static void removeCycleByIdProject(int idProject){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("DELETE FROM cycle WHERE project=?");
+            ps.setInt(1, idProject);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+    
 }

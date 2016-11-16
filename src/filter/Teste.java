@@ -5,32 +5,6 @@
  */
 package filter;
 
-import com.fathzer.soft.javaluator.BracketPair;
-import com.fathzer.soft.javaluator.DoubleEvaluator;
-import com.fathzer.soft.javaluator.Parameters;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import metrics.Granulatiry;
-import metrics.MetricMethod;
-import metrics.MetricPackage;
-import structure.DetectionStrategy;
-import structure.Method;
-import structure.Project;
-import structure.dao.LogDAO;
-import structure.log.Log;
-
 /**
  *
  * @author bruno

@@ -73,6 +73,8 @@
                               <Component id="jPanelDetectionStrategy" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jButtonClean" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jButtonBackspace" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jButtonRegister" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -129,10 +131,16 @@
                   <Component id="jPanelOperators" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanelDetectionStrategy" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonRegister" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBackspace" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jButtonRegister" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -289,7 +297,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonCA" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -304,6 +312,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonRMI" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -432,7 +441,7 @@
                           <Component id="jButtonSIX" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonWMC" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -729,6 +738,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNameDetectionStrategy">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonBackspace">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Backspace"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBackspaceActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

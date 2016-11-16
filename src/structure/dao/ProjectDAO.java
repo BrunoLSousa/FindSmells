@@ -148,6 +148,32 @@ public class ProjectDAO implements DAO{
     }
     
     public void remove(Integer id){
+        MethodDAO.removeByIdProject(id);
+        PackageDAO.removeByIdProject(id);
+        TypeDAO.removeByIdProject(id);
+        ProjectDAO.removeMeasureProjectByIdProject(id);
+        LogDAO.removeByIdProject(id);
+        CycleDAO.removeCycleDataByIdProject(id);
+        CycleDAO.removeCycleByIdProject(id);
+        removeProject(id);
+    }
+    
+    public static void removeMeasureProjectByIdProject(Integer idProject){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("DELETE FROM measure_project WHERE project=?");
+            ps.setInt(1, idProject);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(connection, ps);
+        }
+    }
+    
+    private void removeProject(Integer id){
         Connection connection = null;
         PreparedStatement ps = null;
         try {
