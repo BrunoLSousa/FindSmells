@@ -216,7 +216,7 @@ public class DBConnection {
         try {
             connection = getConnection();
             ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('God Class', 'Type', "
-                    + "'(lcom > 0.725 AND wmc > 34 AND nof > 8 AND nom > 14)', '1')");
+                    + "'(lcom > 0.725 AND wmc > 34 AND nof > 8 AND nom > 14)', '0')");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -231,7 +231,7 @@ public class DBConnection {
         try {
             connection = getConnection();
             ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Long Method', 'Method', "
-                    + "'(mloc > 30 AND vg > 4 AND nbd > 3)', '1')");
+                    + "'(mloc > 30 AND vg > 4 AND nbd > 3)', '0')");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,7 +246,7 @@ public class DBConnection {
         try {
             connection = getConnection();
             ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Data Class', 'Type', "
-                    + "'(nsc <= 1 AND dit <= 2 AND nof > 3)', '1')");
+                    + "'(nsc <= 1 AND dit <= 2 AND nof > 3)', '0')");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -261,7 +261,7 @@ public class DBConnection {
         try {
             connection = getConnection();
             ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Feature Envy', 'Type', "
-                    + "'(lcom > 0.725)', '1')");
+                    + "'(lcom > 0.725)', '0')");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -276,7 +276,7 @@ public class DBConnection {
         try {
             connection = getConnection();
             ps = connection.prepareStatement("INSERT INTO detection_strategy(name, granularity, expression, flag) VALUES ('Refused Bequest', 'Type', "
-                    + "'(six > 0.019)', '1')");
+                    + "'(six > 0.019)', '0')");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
