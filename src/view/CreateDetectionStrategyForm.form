@@ -85,9 +85,9 @@
                           <Component id="jLabelOptionDetectionStrategy" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           <Component id="jRadioButtonMethod" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                           <Component id="jRadioButtonPackage" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jRadioButtonType" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
@@ -110,13 +110,11 @@
                       <Component id="jTextFieldNameDetectionStrategy" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="6" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="jLabelOptionDetectionStrategy" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonMethod" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonType" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jRadioButtonPackage" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelOptionDetectionStrategy" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonMethod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonType" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonPackage" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -253,7 +251,7 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButtonType">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Type"/>
+            <Property name="text" type="java.lang.String" value="Class"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonTypeActionPerformed"/>
@@ -441,7 +439,7 @@
                           <Component id="jButtonSIX" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonWMC" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

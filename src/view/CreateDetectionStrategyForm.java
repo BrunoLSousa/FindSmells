@@ -182,7 +182,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             }
         });
 
-        jRadioButtonType.setText("Type");
+        jRadioButtonType.setText("Class");
         jRadioButtonType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonTypeActionPerformed(evt);
@@ -399,7 +399,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addGroup(jPanelTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSIX)
                     .addComponent(jButtonWMC))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanelOperators.setBorder(javax.swing.BorderFactory.createTitledBorder("Operators"));
@@ -595,9 +595,9 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                         .addComponent(jLabelOptionDetectionStrategy)
                         .addGap(73, 73, 73)
                         .addComponent(jRadioButtonMethod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(94, 94, 94)
                         .addComponent(jRadioButtonPackage)
-                        .addGap(88, 88, 88)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButtonType)
                         .addGap(65, 65, 65))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
@@ -614,12 +614,11 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                     .addComponent(jLabelNameDetectionStrategy)
                     .addComponent(jTextFieldNameDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelOptionDetectionStrategy)
-                        .addComponent(jRadioButtonMethod)
-                        .addComponent(jRadioButtonType))
-                    .addComponent(jRadioButtonPackage, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelOptionDetectionStrategy)
+                    .addComponent(jRadioButtonMethod)
+                    .addComponent(jRadioButtonType)
+                    .addComponent(jRadioButtonPackage))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanelMethod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -925,7 +924,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             enablePanelPackage(true);
             enablePanelType(false);
             this.jRadioButtonPackage.setSelected(true);
-        } else if (granularity.equals("Type")) {
+        } else if (granularity.equals("Class")) {
             enablePanelMethods(false);
             enablePanelPackage(false);
             enablePanelType(true);
