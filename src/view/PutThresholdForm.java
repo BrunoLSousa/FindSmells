@@ -174,11 +174,11 @@ public class PutThresholdForm extends javax.swing.JFrame {
     private boolean inputValuesToStrategy() {
         String validator = "0987654321";
         String exp = this.expression;
-        String[] split = exp.split("VALUE");
+        String[] split = exp.split("THRESHOLD");
         for (int index = 0; index < (split.length - 1); index++) {
             if (!this.fieldsMetrics[index].getText().isEmpty()) {
                 if (validateNumber(this.fieldsMetrics[index].getText())) {
-                    exp = exp.replaceFirst("VALUE", this.fieldsMetrics[index].getText());
+                    exp = exp.replaceFirst("THRESHOLD", this.fieldsMetrics[index].getText());
                 } else {
                     JOptionPane.showMessageDialog(this, "The field of metric " + this.metrics[index].toString() + " has a value invalid. is empty. Insert a value valid!", "Attention", JOptionPane.WARNING_MESSAGE, null);
                     this.fieldsMetrics[index].grabFocus();
@@ -243,7 +243,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
     }
 
     private void identifyMetrics() {
-        String[] split = this.expression.split("VALUE");
+        String[] split = this.expression.split("THRESHOLD");
         this.metrics = new Enum[split.length - 1];
         this.fieldsMetrics = new JTextField[split.length - 1];
         switch (this.granularity) {
@@ -253,7 +253,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
             case "Package":
                 identifyMetricPackage(split);
                 break;
-            case "Type":
+            case "Class":
                 identifyMetricType(split);
                 break;
         }

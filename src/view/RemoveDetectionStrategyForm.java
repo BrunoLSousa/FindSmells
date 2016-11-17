@@ -65,7 +65,6 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
         jButtonRemove = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FindSmells");
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

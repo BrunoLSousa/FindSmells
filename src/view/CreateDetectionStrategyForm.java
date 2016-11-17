@@ -399,7 +399,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addGroup(jPanelTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSIX)
                     .addComponent(jButtonWMC))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelOperators.setBorder(javax.swing.BorderFactory.createTitledBorder("Operators"));
@@ -432,7 +432,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             }
         });
 
-        jButtonValue.setText("VALUE");
+        jButtonValue.setText("THRESHOLD");
         jButtonValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonValueActionPerformed(evt);
@@ -518,7 +518,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addGap(0, 63, Short.MAX_VALUE))
         );
 
-        jPanelDetectionStrategy.setBorder(javax.swing.BorderFactory.createTitledBorder("Expression"));
+        jPanelDetectionStrategy.setBorder(javax.swing.BorderFactory.createTitledBorder("Detection Strategy"));
 
         jTextAreaDetectionStrategy.setEditable(false);
         jTextAreaDetectionStrategy.setColumns(20);
@@ -538,7 +538,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             jPanelDetectionStrategyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetectionStrategyLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         jButtonClean.setText("Clean");
@@ -844,7 +844,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
 
     private void jButtonValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValueActionPerformed
         String detectionStrategy = this.jTextAreaDetectionStrategy.getText();
-        detectionStrategy += "VALUE ";
+        detectionStrategy += "THRESHOLD ";
         this.jTextAreaDetectionStrategy.setText(detectionStrategy);
     }//GEN-LAST:event_jButtonValueActionPerformed
 
@@ -969,13 +969,13 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
     private void loadVariablesToValue() {
         this.variables = new HashMap<>();
         for (MetricMethod metric : MetricMethod.values()) {
-            this.variables.put(metric.toString().toLowerCase(), "VALUE");
+            this.variables.put(metric.toString().toLowerCase(), "THRESHOLD");
         }
         for (MetricPackage metric : MetricPackage.values()) {
-            this.variables.put(metric.toString().toLowerCase(), "VALUE");
+            this.variables.put(metric.toString().toLowerCase(), "THRESHOLD");
         }
         for (MetricType metric : MetricType.values()) {
-            this.variables.put(metric.toString().toLowerCase(), "VALUE");
+            this.variables.put(metric.toString().toLowerCase(), "THRESHOLD");
         }
     }
 

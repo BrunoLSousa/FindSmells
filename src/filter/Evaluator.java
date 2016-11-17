@@ -112,7 +112,7 @@ public class Evaluator {
             }else {
                 return false;
             }
-            return ((MetricMethod.contains(separate[0]) || MetricPackage.contains(separate[0]) || MetricType.contains(separate[0])) && separate[1].equals("VALUE"));
+            return ((MetricMethod.contains(separate[0]) || MetricPackage.contains(separate[0]) || MetricType.contains(separate[0])) && separate[1].equals("THRESHOLD"));
         } catch (Exception e) {
             System.err.println("Error in the creation of expression!");
             return false;

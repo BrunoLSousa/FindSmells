@@ -209,12 +209,12 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
     private boolean inputValuesToStrategy() {
         int idDetectionStrategy = this.jComboBoxDetectionStrategy.getSelectedIndex();
         String exp = this.detectionStrategies.get(idDetectionStrategy).getExpression();
-        exp = exp.replaceAll("[0-9]+(\\.[0-9]+)?", "VALUE");
-        String[] split = exp.split("VALUE");
+        exp = exp.replaceAll("[0-9]+(\\.[0-9]+)?", "THRESHOLD");
+        String[] split = exp.split("THRESHOLD");
         for (int index = 0; index < (split.length - 1); index++) {
             if (!this.fieldsMetrics[index].getText().isEmpty()) {
                 if (validateNumber(this.fieldsMetrics[index].getText())) {
-                    exp = exp.replaceFirst("VALUE", this.fieldsMetrics[index].getText());
+                    exp = exp.replaceFirst("THRESHOLD", this.fieldsMetrics[index].getText());
                 } else {
                     JOptionPane.showMessageDialog(this, "The field of metric " + this.metrics[index].toString() + " has a value invalid. is empty. Insert a value valid!", "Attention", JOptionPane.WARNING_MESSAGE, null);
                     this.fieldsMetrics[index].grabFocus();
@@ -309,7 +309,7 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             case "Package":
                 identifyMetricPackage(split);
                 break;
-            case "Type":
+            case "Class":
                 identifyMetricType(split);
                 break;
         }

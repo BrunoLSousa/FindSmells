@@ -10,5 +10,5 @@ package metrics;
  * @author bruno
  */
 public enum Granulatiry {
-    Method, Package, Type;
+    Method, Package, Class;
 }

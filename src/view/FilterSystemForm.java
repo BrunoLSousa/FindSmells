@@ -70,16 +70,17 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jLabelXmlSelected = new javax.swing.JLabel();
         jButtonCleanTextArea = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuFile = new javax.swing.JMenu();
         jMenuItemLog = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemExit = new javax.swing.JMenuItem();
-        jMenuTool = new javax.swing.JMenu();
+        jMenuManageStrategies = new javax.swing.JMenu();
         jMenuItemCreateDetectionStrategy = new javax.swing.JMenuItem();
         jMenuItemUpdateThreshold = new javax.swing.JMenuItem();
         jMenuItemRemoveDetectionStrategy = new javax.swing.JMenuItem();
+        jMenuManageSystems = new javax.swing.JMenu();
         jMenuItemRemoveProject = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jMenuItemMetricsCatalog = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -89,7 +90,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         setTitle("FindSmells");
         setResizable(false);
 
-        jPanelFilterSystem.setBorder(javax.swing.BorderFactory.createTitledBorder("Bad Smells Detection"));
+        jPanelFilterSystem.setBorder(javax.swing.BorderFactory.createTitledBorder("Run Detection Strategy"));
 
         jLabelProject.setText("Choose a Project:");
 
@@ -146,7 +147,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        jPanelRegisterProject.setBorder(javax.swing.BorderFactory.createTitledBorder("Submit System"));
+        jPanelRegisterProject.setBorder(javax.swing.BorderFactory.createTitledBorder("Import System"));
         jPanelRegisterProject.setMinimumSize(new java.awt.Dimension(597, 376));
 
         jLabelNameProject.setText("Project:");
@@ -211,11 +212,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jPanelRegisterProjectLayout.setVerticalGroup(
             jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegisterProjectLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(22, 22, 22)
                 .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNameProject)
                     .addComponent(jTextFieldNameProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addComponent(jLabelXmlSelected)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRegisterProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -252,16 +253,16 @@ public class FilterSystemForm extends javax.swing.JFrame {
 
         jPanelRegisterProject.getAccessibleContext().setAccessibleName("Register Project");
 
-        jMenu1.setText("File");
+        jMenuFile.setText("File");
 
-        jMenuItemLog.setText("Vizualize Logs");
+        jMenuItemLog.setText("Logs");
         jMenuItemLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemLogActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemLog);
-        jMenu1.add(jSeparator1);
+        jMenuFile.add(jMenuItemLog);
+        jMenuFile.add(jSeparator1);
 
         jMenuItemExit.setText("Exit");
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
@@ -269,11 +270,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 jMenuItemExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemExit);
+        jMenuFile.add(jMenuItemExit);
 
-        jMenuBar.add(jMenu1);
+        jMenuBar.add(jMenuFile);
 
-        jMenuTool.setText("Tool");
+        jMenuManageStrategies.setText("Manage Strategies");
 
         jMenuItemCreateDetectionStrategy.setText("Create Detection Strategy");
         jMenuItemCreateDetectionStrategy.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +282,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 jMenuItemCreateDetectionStrategyActionPerformed(evt);
             }
         });
-        jMenuTool.add(jMenuItemCreateDetectionStrategy);
+        jMenuManageStrategies.add(jMenuItemCreateDetectionStrategy);
 
         jMenuItemUpdateThreshold.setText("Update Detection Strategy");
         jMenuItemUpdateThreshold.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +290,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 jMenuItemUpdateThresholdActionPerformed(evt);
             }
         });
-        jMenuTool.add(jMenuItemUpdateThreshold);
+        jMenuManageStrategies.add(jMenuItemUpdateThreshold);
 
         jMenuItemRemoveDetectionStrategy.setText("Remove Detection Strategy");
         jMenuItemRemoveDetectionStrategy.addActionListener(new java.awt.event.ActionListener() {
@@ -297,7 +298,11 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 jMenuItemRemoveDetectionStrategyActionPerformed(evt);
             }
         });
-        jMenuTool.add(jMenuItemRemoveDetectionStrategy);
+        jMenuManageStrategies.add(jMenuItemRemoveDetectionStrategy);
+
+        jMenuBar.add(jMenuManageStrategies);
+
+        jMenuManageSystems.setText("Manage Systems");
 
         jMenuItemRemoveProject.setText("Remove Project");
         jMenuItemRemoveProject.addActionListener(new java.awt.event.ActionListener() {
@@ -305,23 +310,23 @@ public class FilterSystemForm extends javax.swing.JFrame {
                 jMenuItemRemoveProjectActionPerformed(evt);
             }
         });
-        jMenuTool.add(jMenuItemRemoveProject);
+        jMenuManageSystems.add(jMenuItemRemoveProject);
 
-        jMenuBar.add(jMenuTool);
+        jMenuBar.add(jMenuManageSystems);
 
-        jMenu2.setText("About");
+        jMenuHelp.setText("Help");
 
         jMenuItemHelp.setText("Tutorial");
-        jMenu2.add(jMenuItemHelp);
+        jMenuHelp.add(jMenuItemHelp);
 
         jMenuItemMetricsCatalog.setText("Threshold Catalog");
-        jMenu2.add(jMenuItemMetricsCatalog);
-        jMenu2.add(jSeparator2);
+        jMenuHelp.add(jMenuItemMetricsCatalog);
+        jMenuHelp.add(jSeparator2);
 
-        jMenuItemAboutFindSmells.setText("About FindSmells");
-        jMenu2.add(jMenuItemAboutFindSmells);
+        jMenuItemAboutFindSmells.setText("About");
+        jMenuHelp.add(jMenuItemAboutFindSmells);
 
-        jMenuBar.add(jMenu2);
+        jMenuBar.add(jMenuHelp);
 
         setJMenuBar(jMenuBar);
 
@@ -389,7 +394,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
             List<DetectionStrategy> detections = (List<DetectionStrategy>) new DetectionStrategyDAO().selectAll();
             List<Project> projects = (List<Project>) new ProjectDAO().selectAll();
             Object artefactsWithBadSmells;
-            if (detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Type)) {
+            if (detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Class)) {
                 artefactsWithBadSmells = new TypeDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
             } else if (detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()).getGranularity().equals(Granulatiry.Method)) {
                 artefactsWithBadSmells = new MethodDAO().applyDetectionStrategy(detections.get(this.jComboBoxDetectionStrategy.getSelectedIndex()), projects.get(this.jComboBoxProject.getSelectedIndex()));
@@ -531,9 +536,9 @@ public class FilterSystemForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNameProject;
     private javax.swing.JLabel jLabelProject;
     private javax.swing.JLabel jLabelXmlSelected;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAboutFindSmells;
     private javax.swing.JMenuItem jMenuItemCreateDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemExit;
@@ -543,7 +548,8 @@ public class FilterSystemForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRemoveDetectionStrategy;
     private javax.swing.JMenuItem jMenuItemRemoveProject;
     private javax.swing.JMenuItem jMenuItemUpdateThreshold;
-    private javax.swing.JMenu jMenuTool;
+    private javax.swing.JMenu jMenuManageStrategies;
+    private javax.swing.JMenu jMenuManageSystems;
     private javax.swing.JPanel jPanelFilterSystem;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelRegisterProject;

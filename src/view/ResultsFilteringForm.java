@@ -145,7 +145,7 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateLabelResult(){
-        if(granularity.equals(Granulatiry.Type)){
+        if(granularity.equals(Granulatiry.Class)){
             List<structure.Type> types = (List<structure.Type>) artefactsWithBadSmells;
             int total = new TypeDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(types.size() + " of " + total + " classes.");
@@ -178,7 +178,7 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     }
 
     private String[][] getData() {
-        if(granularity.equals(Granulatiry.Type)){
+        if(granularity.equals(Granulatiry.Class)){
             return getDataType();
         }else if(granularity.equals(Granulatiry.Method)){
             return getDataMethod();
@@ -231,7 +231,7 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
 
     private String[] getColumns() {
         String[] columns;
-        if (granularity.equals(Granulatiry.Method) || granularity.equals(Granulatiry.Type)) {
+        if (granularity.equals(Granulatiry.Method) || granularity.equals(Granulatiry.Class)) {
             columns = new String[]{"Name", "Source", "Package"};
         }else {
             columns = new String[]{"Name", "Package"};
