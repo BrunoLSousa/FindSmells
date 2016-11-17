@@ -40,6 +40,7 @@ public class LogsForm extends javax.swing.JFrame {
     public LogsForm() {
         initComponents();
         verifyStateButtons();
+        this.setLocationRelativeTo(null);
     }
 
     /**

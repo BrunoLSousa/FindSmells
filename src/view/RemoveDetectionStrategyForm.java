@@ -34,6 +34,7 @@ public class RemoveDetectionStrategyForm extends javax.swing.JFrame {
         updatePages();
         verifyStateButtons();
         updateHighlighter();
+        this.setLocationRelativeTo(null);
     }
 
 //    public RemoveDetectionStrategyForm(FilterSystemForm mainScreen) {

@@ -27,6 +27,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         initComponents();
         initPanels();
         loadVariablesToValue();
+        this.setLocationRelativeTo(null);
     }
 
     public CreateDetectionStrategyForm(FilterSystemForm frame) {
@@ -34,6 +35,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         initComponents();
         initPanels();
         loadVariablesToValue();
+        this.setLocationRelativeTo(null);
     }
 
     public CreateDetectionStrategyForm(String name, String granularity, String expression, FilterSystemForm frame) {
@@ -43,6 +45,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         this.jTextFieldNameDetectionStrategy.setText(name);
         this.jTextAreaDetectionStrategy.setText(expression);
         this.frame = frame;
+        this.setLocationRelativeTo(null);
     }
 
     /**

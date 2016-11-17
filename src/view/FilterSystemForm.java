@@ -40,6 +40,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         DBConnection.createDataBase();
         initComponents();
         this.xmlFiles = new LinkedHashSet<>();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -317,13 +318,28 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jMenuHelp.setText("Help");
 
         jMenuItemHelp.setText("Tutorial");
+        jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHelpActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemHelp);
 
         jMenuItemMetricsCatalog.setText("Threshold Catalog");
+        jMenuItemMetricsCatalog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMetricsCatalogActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemMetricsCatalog);
         jMenuHelp.add(jSeparator2);
 
         jMenuItemAboutFindSmells.setText("About");
+        jMenuItemAboutFindSmells.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutFindSmellsActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemAboutFindSmells);
 
         jMenuBar.add(jMenuHelp);
@@ -447,6 +463,21 @@ public class FilterSystemForm extends javax.swing.JFrame {
         RemoveProjectForm remove = new RemoveProjectForm(this);
         remove.setVisible(true);
     }//GEN-LAST:event_jMenuItemRemoveProjectActionPerformed
+
+    private void jMenuItemMetricsCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMetricsCatalogActionPerformed
+        ThresholdCatalogForm frame = new ThresholdCatalogForm();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jMenuItemMetricsCatalogActionPerformed
+
+    private void jMenuItemAboutFindSmellsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutFindSmellsActionPerformed
+        AboutForm frame = new AboutForm();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAboutFindSmellsActionPerformed
+
+    private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
+        TutorialForm frame = new TutorialForm();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHelpActionPerformed
 
     public void refresh() {
         selectProjects();

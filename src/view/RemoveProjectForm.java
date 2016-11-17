@@ -31,6 +31,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
         updatePages();
         verifyStateButtons();
         updateHighlighter();
+        this.setLocationRelativeTo(null);
     }
 
     /**

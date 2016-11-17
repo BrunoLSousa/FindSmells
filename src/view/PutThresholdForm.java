@@ -43,6 +43,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
         this.mainScreen = mainScreen;
         identifyMetrics();
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

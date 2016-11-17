@@ -26,7 +26,7 @@ public class ProgressBarForm extends javax.swing.JFrame{
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ProgressBarForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        this.setLocationRelativeTo(null);
     }
     
     public void initialize(int max, String message){

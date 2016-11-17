@@ -5,11 +5,19 @@
  */
 package view;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 import metrics.Granulatiry;
 import structure.Method;
 import structure.Project;
@@ -35,6 +43,7 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         this.granularity = granularity;
         this.project = project;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -90,6 +99,11 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         tableResults();
 
         jButtonExportCsv.setText("Export Data in CSV");
+        jButtonExportCsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportCsvActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelResultsLayout = new javax.swing.GroupLayout(jPanelResults);
         jPanelResults.setLayout(jPanelResultsLayout);
@@ -144,22 +158,70 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateLabelResult(){
-        if(granularity.equals(Granulatiry.Class)){
+    private void jButtonExportCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportCsvActionPerformed
+        JFileChooser jfileChooser = new JFileChooser();
+        int returnVal = jfileChooser.showSaveDialog(this);
+        int confirm = 0;
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            try {
+                File csv = jfileChooser.getSelectedFile();
+                csv.createNewFile();
+                confirm = toExcel(this.jTableResults, csv);
+            } catch (IOException ex) {
+                Logger.getLogger(ResultsFilteringForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (confirm == 1) {
+            JOptionPane.showMessageDialog(this, "Successfully generated report!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Couldn't export the report!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonExportCsvActionPerformed
+
+    public int toExcel(JTable table, File file) {
+        try {
+            TableModel model = table.getModel();
+            FileWriter csv = new FileWriter(file);
+
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                csv.write(model.getColumnName(i).toUpperCase() + ";");
+            }
+
+            csv.write("\n");
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    csv.write(model.getValueAt(i, j).toString() + ";");
+                }
+                csv.write("\n");
+            }
+            csv.close();
+
+            return 1;
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        return 0;
+    }
+
+    private void updateLabelResult() {
+        if (granularity.equals(Granulatiry.Class)) {
             List<structure.Type> types = (List<structure.Type>) artefactsWithBadSmells;
             int total = new TypeDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(types.size() + " of " + total + " classes.");
-        }else if(granularity.equals(Granulatiry.Method)){
+        } else if (granularity.equals(Granulatiry.Method)) {
             List<Method> methods = (List<Method>) artefactsWithBadSmells;
             int total = new MethodDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(methods.size() + " of " + total + " methods.");
-        }else {
+        } else {
             List<structure.Package> packages = (List<structure.Package>) artefactsWithBadSmells;
             int total = new PackageDAO().totalArtifacts(this.project);
             this.jLabelResult.setText(packages.size() + " of " + total + " packages.");
         }
     }
-    
+
     private void tableResults() {
         String[] column = getColumns();
         String[][] data = getData();
@@ -178,11 +240,11 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     }
 
     private String[][] getData() {
-        if(granularity.equals(Granulatiry.Class)){
+        if (granularity.equals(Granulatiry.Class)) {
             return getDataType();
-        }else if(granularity.equals(Granulatiry.Method)){
+        } else if (granularity.equals(Granulatiry.Method)) {
             return getDataMethod();
-        }else {
+        } else {
             return getDataPackage();
         }
     }
@@ -233,7 +295,7 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         String[] columns;
         if (granularity.equals(Granulatiry.Method) || granularity.equals(Granulatiry.Class)) {
             columns = new String[]{"Name", "Source", "Package"};
-        }else {
+        } else {
             columns = new String[]{"Name", "Package"};
         }
         return columns;
