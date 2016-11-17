@@ -5,14 +5,12 @@
  */
 package connection;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import structure.DetectionStrategy;
 import structure.dao.DetectionStrategyDAO;
 
@@ -24,9 +22,10 @@ public class DBConnection {
 
     public static Connection getConnection() throws ClassNotFoundException {
         Connection connection = null;
+        String path = getPath();
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:findSmells.sqlite");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + path + "/findSmells.sqlite");
         } catch (ClassNotFoundException ex) {
             String errorMessage = "Driver não encontrado!";
             throw new ClassNotFoundException(errorMessage, ex);
@@ -307,6 +306,35 @@ public class DBConnection {
             insertDetectionStrategyLongMethod();
             insertDetectionStrategyRefusedBequest();
         }
+    }
+
+    private static String preProcessPath(String path) {
+        if (path.startsWith("~")) {
+            String osName = System.getProperty("os.name").toLowerCase();
+            String homePath = System.getProperty("user.home");
+            if (osName.startsWith("windows")) {
+                homePath = homePath.replace("\\", "/");
+            }
+            path = path.replaceFirst("^~", homePath);
+        } else if (path.startsWith(".") && !path.startsWith("..")) {
+            String osName = System.getProperty("os.name").toLowerCase();
+            String currPath = System.getProperty("user.dir");
+            if (osName.startsWith("windows")) {
+                currPath = currPath.replace("\\", "/");
+            }
+            path = path.replaceFirst("^\\.", currPath);
+        }
+        return path;
+    }
+
+    private static String getPath() {
+        String path = "~/.findsmells";
+        path = preProcessPath(path);
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdirs(); 
+        }
+        return path;
     }
 
 }
