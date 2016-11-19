@@ -69,7 +69,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabelDetectionStrategy.setText("Detection Strategy:");
+        jLabelDetectionStrategy.setText("Selected Detection Strategy:");
 
         jLabelNameDetectionStrategy.setText(this.nameDetectionStrategy);
 
@@ -92,7 +92,7 @@ public class PutThresholdForm extends javax.swing.JFrame {
         });
 
         initMetrics();
-        jScrollPanePutThreshold.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Define the threshold to the metrics"));
+        jScrollPanePutThreshold.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Please, inform a threashold for each metric of the strategy"));
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -106,14 +106,20 @@ public class PutThresholdForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDone))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelDetectionStrategy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNameDetectionStrategy)
-                            .addComponent(jLabelGranularityDetectionStrategy)
-                            .addComponent(jScrollPanePutThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                                        .addGap(73, 73, 73)
+                                        .addComponent(jScrollPanePutThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelGranularityDetectionStrategy))))
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addComponent(jLabelDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelNameDetectionStrategy)))
                         .addGap(160, 160, 160)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

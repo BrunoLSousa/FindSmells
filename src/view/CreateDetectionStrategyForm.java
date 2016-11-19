@@ -108,7 +108,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         setTitle("FindSmells");
         setResizable(false);
 
-        jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Detection Strategy"));
+        jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Compose Detection Strategy"));
 
         jPanelMethod.setBorder(javax.swing.BorderFactory.createTitledBorder("Metrics of Method"));
 
@@ -169,7 +169,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabelOptionDetectionStrategy.setText("Granularity of detection strategy: ");
+        jLabelOptionDetectionStrategy.setText("Granularity of Detection Strategy: ");
 
         jRadioButtonMethod.setText("Method");
         jRadioButtonMethod.addActionListener(new java.awt.event.ActionListener() {
@@ -518,7 +518,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                     .addComponent(jButtonEquals)
                     .addComponent(jButtonSmallerEquals)
                     .addComponent(jButtonLargerEquals))
-                .addGap(0, 63, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         jPanelDetectionStrategy.setBorder(javax.swing.BorderFactory.createTitledBorder("Detection Strategy"));
@@ -541,7 +541,7 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             jPanelDetectionStrategyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetectionStrategyLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         jButtonClean.setText("Clean");
@@ -551,14 +551,14 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
             }
         });
 
-        jButtonRegister.setText("Register");
+        jButtonRegister.setText("Save");
         jButtonRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegisterActionPerformed(evt);
             }
         });
 
-        jLabelNameDetectionStrategy.setText("Name of Detection Strategy:");
+        jLabelNameDetectionStrategy.setText("Name of the Strategy:");
 
         jButtonBackspace.setText("Backspace");
         jButtonBackspace.addActionListener(new java.awt.event.ActionListener() {
@@ -633,14 +633,12 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
                 .addComponent(jPanelOperators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonClean)
-                        .addComponent(jButtonBackspace))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jButtonRegister)
-                        .addContainerGap())))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonClean)
+                    .addComponent(jButtonBackspace)
+                    .addComponent(jButtonRegister))
+                .addGap(39, 39, 39))
         );
 
         jPanelMethod.getAccessibleContext().setAccessibleName("");
@@ -649,13 +647,11 @@ public class CreateDetectionStrategyForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

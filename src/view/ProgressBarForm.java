@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -14,40 +15,35 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author bruno
  */
-public class ProgressBarForm extends javax.swing.JFrame{
+public class ProgressBarForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ProgressBarForm
      */
     public ProgressBarForm() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            initComponents();
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(ProgressBarForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public void initialize(int max, String message){
+
+    public void initialize(int max, String message) {
         setMaximum(max);
         setMessage(message);
     }
-    
-    public void finish(){
+
+    public void finish() {
         this.jProgressBar.setValue(0);
         this.setVisible(false);
     }
-    
-    private void setMaximum(int max){
+
+    private void setMaximum(int max) {
         this.jProgressBar.setMaximum(max);
     }
-    
-    public void incrementValue(){
+
+    public void incrementValue() {
         this.jProgressBar.setValue(this.jProgressBar.getValue() + 1);
     }
-    
-    private void setMessage(String message){
+
+    private void setMessage(String message) {
         this.jLabelMessage.setText(message);
     }
 
@@ -65,11 +61,19 @@ public class ProgressBarForm extends javax.swing.JFrame{
         jLabelMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Converting XML File");
+        setTitle("Importing XML File");
         setResizable(false);
 
-        jProgressBar.setForeground(new java.awt.Color(0, 153, 255));
+        jProgressBar.setForeground(new java.awt.Color(0, 0, 0));
         jProgressBar.setStringPainted(true);
+        //A cor da barra que aponta o valor
+        UIManager.put("ProgressBar.foreground", Color.RED);
+        //A cor do fundo
+        UIManager.put("ProgressBar.background", Color.YELLOW);
+        //A cor da String quando a barra de valor estiver sobre ela
+        UIManager.put("ProgressBar.selectionForeground", Color.BLACK);
+        //A cor da String quando a barra de valor NÃO estiver sobre ela
+        UIManager.put("ProgressBar.selectionBackground", Color.BLUE);
 
         jLabelMessage.setText("jLabel1");
 
@@ -109,12 +113,12 @@ public class ProgressBarForm extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar;
     // End of variables declaration//GEN-END:variables
-    
+
 }

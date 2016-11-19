@@ -39,7 +39,7 @@ public class TutorialForm extends javax.swing.JFrame {
         jTextAreaText.setEditable(false);
         jTextAreaText.setColumns(20);
         jTextAreaText.setRows(5);
-        jTextAreaText.setText("\nA demonstration video of FindSmells 1.0 is avaible in the link:\n\nhttp://www2.dcc.ufmg.br/laboratorios/llp/Products/Products/indexProducts.html");
+        jTextAreaText.setText("\nA demonstration video of FindSmells 1.0 is avaible in the following link:\n\nhttp://www2.dcc.ufmg.br/laboratorios/llp/Products/Products/indexProducts.html");
         jScrollPane1.setViewportView(jTextAreaText);
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);

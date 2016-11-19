@@ -59,9 +59,9 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabelResult = new javax.swing.JLabel();
+        jButtonExportCsv = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableResults = new javax.swing.JTable();
-        jButtonExportCsv = new javax.swing.JButton();
 
         setTitle("FindSmells");
         setResizable(false);
@@ -69,11 +69,18 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         jPanelResults.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("Results of Filtering");
+        jLabel1.setText("Detection Results");
 
         jLabel2.setText("Result:");
 
         jLabelResult.setText("jLabel3");
+
+        jButtonExportCsv.setText("Export Result as a CSV File");
+        jButtonExportCsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportCsvActionPerformed(evt);
+            }
+        });
 
         jTableResults.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,13 +104,6 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTableResults);
         updateLabelResult();
         tableResults();
-
-        jButtonExportCsv.setText("Export Data in CSV");
-        jButtonExportCsv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExportCsvActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanelResultsLayout = new javax.swing.GroupLayout(jPanelResults);
         jPanelResults.setLayout(jPanelResultsLayout);
@@ -294,9 +294,9 @@ public class ResultsFilteringForm extends javax.swing.JFrame {
     private String[] getColumns() {
         String[] columns;
         if (granularity.equals(Granulatiry.Method) || granularity.equals(Granulatiry.Class)) {
-            columns = new String[]{"Name", "Source", "Package"};
+            columns = new String[]{"Code Element", "Source", "Package"};
         } else {
-            columns = new String[]{"Name", "Package"};
+            columns = new String[]{"Code Element", "Package"};
         }
         return columns;
     }

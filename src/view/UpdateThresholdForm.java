@@ -82,9 +82,9 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             }
         });
 
-        jScrollPaneThresholds.setBorder(javax.swing.BorderFactory.createTitledBorder("Thresholds"));
+        jScrollPaneThresholds.setBorder(javax.swing.BorderFactory.createTitledBorder("Thresholds (you can replace them, if necessary)"));
 
-        jButtonDone.setText("Done");
+        jButtonDone.setText("Save");
         jButtonDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDoneActionPerformed(evt);
@@ -98,7 +98,7 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             }
         });
 
-        jPanelDetectionStrategyCurrent.setBorder(javax.swing.BorderFactory.createTitledBorder("Detection Strategy Current"));
+        jPanelDetectionStrategyCurrent.setBorder(javax.swing.BorderFactory.createTitledBorder("Detection Strategy"));
         jPanelDetectionStrategyCurrent.setToolTipText("");
         jPanelDetectionStrategyCurrent.setPreferredSize(new java.awt.Dimension(678, 121));
 
@@ -120,8 +120,8 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             jPanelDetectionStrategyCurrentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetectionStrategyCurrentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
@@ -135,12 +135,12 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
                         .addComponent(jLabelDetectionStrategy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                    .addComponent(jScrollPaneThresholds)
+                    .addComponent(jPanelDetectionStrategyCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jButtonReset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDone))
-                    .addComponent(jScrollPaneThresholds)
-                    .addComponent(jPanelDetectionStrategyCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonDone)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
@@ -150,14 +150,14 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDetectionStrategy)
                     .addComponent(jComboBoxDetectionStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPaneThresholds, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jPanelDetectionStrategyCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelDetectionStrategyCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDone)
-                    .addComponent(jButtonReset))
+                    .addComponent(jButtonReset)
+                    .addComponent(jButtonDone))
                 .addGap(23, 23, 23))
         );
 
@@ -169,9 +169,7 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,23 +188,6 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             this.jScrollPaneThresholds.setViewportView(p);
         }
     }//GEN-LAST:event_jComboBoxDetectionStrategyActionPerformed
-
-    private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        if (this.jComboBoxDetectionStrategy.getSelectedIndex() != 0) {
-            if (inputValuesToStrategy()) {
-                int index = jComboBoxDetectionStrategy.getSelectedIndex();
-                DAO dao = new DetectionStrategyDAO();
-                dao.update(this.detectionStrategies.get(index));
-                JOptionPane.showMessageDialog(this, "Detection strategy successfully updated!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                this.mainScreen.refreshDetectionStrategies();
-                selectDetectionStrategies();
-                this.jComboBoxDetectionStrategy.setSelectedIndex(index);
-                loadDetectionStrategy();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Select a detection strategy to update!", "Attention", JOptionPane.WARNING_MESSAGE, null);
-        }
-    }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private boolean inputValuesToStrategy() {
         int idDetectionStrategy = this.jComboBoxDetectionStrategy.getSelectedIndex();
@@ -254,6 +235,23 @@ public class UpdateThresholdForm extends javax.swing.JFrame {
             this.jScrollPaneThresholds.setViewportView(p);
         }
     }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
+        if (this.jComboBoxDetectionStrategy.getSelectedIndex() != 0) {
+            if (inputValuesToStrategy()) {
+                int index = jComboBoxDetectionStrategy.getSelectedIndex();
+                DAO dao = new DetectionStrategyDAO();
+                dao.update(this.detectionStrategies.get(index));
+                JOptionPane.showMessageDialog(this, "Detection strategy successfully updated!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                this.mainScreen.refreshDetectionStrategies();
+                selectDetectionStrategies();
+                this.jComboBoxDetectionStrategy.setSelectedIndex(index);
+                loadDetectionStrategy();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a detection strategy to update!", "Attention", JOptionPane.WARNING_MESSAGE, null);
+        }
+    }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private void loadMetrics() {
         JPanel p = new JPanel();

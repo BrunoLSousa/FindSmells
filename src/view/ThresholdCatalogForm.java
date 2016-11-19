@@ -23,7 +23,7 @@ public class ThresholdCatalogForm extends javax.swing.JFrame {
     }
 
     private void image() {
-            ImageIcon image = new ImageIcon(getClass().getResource("../image/catalog.png"));
+            ImageIcon image = new ImageIcon(this.getClass().getResource("/image/catalog-v02.png"));
             this.jLabel1 = new JLabel(image);
             jPanelThreshold.add(this.jLabel1);
             
@@ -52,16 +52,16 @@ public class ThresholdCatalogForm extends javax.swing.JFrame {
         image();
 
         jLabelTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabelTitle.setText("Catalog of Threshold");
+        jLabelTitle.setText("A Reference Catalog of Software Metric Threshold");
 
         jTextAreaReference.setEditable(false);
         jTextAreaReference.setColumns(20);
         jTextAreaReference.setRows(3);
         jTextAreaReference.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         jTextAreaReference.setSelectionColor(new java.awt.Color(255, 255, 255));
-        String reference = "Filó,  T.  G.  S.  and  da  Silva  Bigonha,  M.  A.  and  Ferreira,  K.  A.  M.  A  catalogue\n"
-        + "of thresholds  for object-oriented software metrics. The First Int. Conf. on Advances\n"
-        + "and Trends in Software Engineering, 2015.";
+        String reference = "T. Filó, M. Bigonha, and K. Ferreira, \"A Catalogue of Thresholds for Object-Oriented\n"
+        + "Software Metrics,\" in Proceedings of the 1st Internation Conference on Advances  and\n"
+        + "Trends in Software Engineering (SOFTENG), 2015, pp. 48-55.";
 
         jTextAreaReference.setText(reference);
         jScrollPane1.setViewportView(jTextAreaReference);
@@ -70,19 +70,19 @@ public class ThresholdCatalogForm extends javax.swing.JFrame {
         jPanelThreshold.setLayout(jPanelThresholdLayout);
         jPanelThresholdLayout.setHorizontalGroup(
             jPanelThresholdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelThresholdLayout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(jLabelTitle)
+                .addGap(20, 20, 20))
             .addGroup(jPanelThresholdLayout.createSequentialGroup()
                 .addGroup(jPanelThresholdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelThresholdLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addGroup(jPanelThresholdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelThresholdLayout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jLabelTitle))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelThresholdLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelThresholdLayout.setVerticalGroup(
             jPanelThresholdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,8 +92,8 @@ public class ThresholdCatalogForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -30,7 +30,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanelMain" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +85,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Filter"/>
+                <TitledBorder title="Search for Systems"/>
               </Border>
             </Property>
           </Properties>
@@ -101,7 +101,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="319" max="32767" attributes="0"/>
+                      <EmptySpace pref="307" max="32767" attributes="0"/>
                       <Component id="jButtonFilter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
                   </Group>
@@ -117,7 +117,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="jButtonFilter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -125,14 +125,14 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelNameProject">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Name of Project:"/>
+                <Property name="text" type="java.lang.String" value="Name of the System:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNameProject">
             </Component>
             <Component class="javax.swing.JButton" name="jButtonFilter">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Filter"/>
+                <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFilterActionPerformed"/>
@@ -144,7 +144,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Projects"/>
+                <TitledBorder title="Search Results"/>
               </Border>
             </Property>
           </Properties>
@@ -178,7 +178,7 @@
                           <Component id="jButtonNext" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelHighlighter" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

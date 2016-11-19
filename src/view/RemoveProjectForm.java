@@ -61,11 +61,11 @@ public class RemoveProjectForm extends javax.swing.JFrame {
 
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
+        jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder("Search for Systems"));
 
-        jLabelNameProject.setText("Name of Project:");
+        jLabelNameProject.setText("Name of the System:");
 
-        jButtonFilter.setText("Filter");
+        jButtonFilter.setText("Search");
         jButtonFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFilterActionPerformed(evt);
@@ -83,7 +83,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
                 .addComponent(jTextFieldNameProject)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFilterLayout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
+                .addContainerGap(307, Short.MAX_VALUE)
                 .addComponent(jButtonFilter)
                 .addGap(274, 274, 274))
         );
@@ -96,10 +96,10 @@ public class RemoveProjectForm extends javax.swing.JFrame {
                     .addComponent(jTextFieldNameProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jButtonFilter)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Projects"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Results"));
 
         jTableProjects.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,7 +170,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
                     .addComponent(jButtonPrevious)
                     .addComponent(jButtonNext)
                     .addComponent(jLabelHighlighter))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jButtonRemove.setText("Remove");
@@ -226,7 +226,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
@@ -264,7 +264,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
                 dao.remove(project.getId());
             }
         }
-        JOptionPane.showMessageDialog(this, "Projects successfully deleted!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "The selected systems we removed successfully!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
         this.projects = new ProjectDAO().selectProjectsByFilter(this.jTextFieldNameProject.getText());
         this.mainScreen.refreshProjects();
         this.selectedAll = false;
@@ -323,7 +323,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
             jTableProjects.getTableHeader().setReorderingAllowed(false);
             jScrollPane1.setViewportView(jTableProjects);
         } else {
-            JLabel emptyLabel = new JLabel("There aren't projects for this filter!!!");
+            JLabel emptyLabel = new JLabel("No results were found for this search.");
             emptyLabel.setHorizontalAlignment(SwingConstants.CENTER);
             jScrollPane1.setViewportView(emptyLabel);
         }
@@ -363,7 +363,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
             }
         };
         model.addColumn("Select");
-        model.addColumn("Name of Project");
+        model.addColumn("Name of the System");
         return model;
     }
 

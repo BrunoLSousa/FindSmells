@@ -66,14 +66,16 @@ public class Filter extends Thread{
             for (File f : this.files) {
                 Document doc = this.builder.build(f);
                 Element root = doc.getRootElement();
-                progressBar.initialize(getLines(root), "Converting file " + Paths.get(f.getName()) + "...");
+                progressBar.initialize(getLines(root), "Importing software metrics from the file '" + Paths.get(f.getName()) + "'. Please, wait.");
                 incrementValue();
                 List element = root.getChildren();
                 Iterator i = element.iterator();
                 converterProject(i);
-                finish();
+                progressBar.finish();
             }
+            finish();
             frame.refresh();
+            
         } catch (JDOMException | IOException ex) {
             exception();
             Logger.getLogger(Filter.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,6 +278,7 @@ public class Filter extends Thread{
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 progressBar.finish();
+//                frame.refresh();
             }
         });
     }

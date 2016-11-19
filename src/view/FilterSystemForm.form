@@ -211,10 +211,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
                       <Component id="jButtonFilter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -231,7 +231,7 @@
                           <Component id="jLabelProject" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxProject" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Component id="jButtonFilter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
@@ -241,7 +241,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelProject">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Choose a Project:"/>
+                <Property name="text" type="java.lang.String" value="Choose a System:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxProject">
@@ -281,7 +281,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonFilter">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Filter"/>
+                <Property name="text" type="java.lang.String" value="Run"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFilterActionPerformed"/>
@@ -293,7 +293,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Import System"/>
+                <TitledBorder title="Import XML File with Metrics"/>
               </Border>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -322,19 +322,18 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="343" max="-2" attributes="0"/>
-                              <EmptySpace pref="39" max="32767" attributes="0"/>
+                              <EmptySpace pref="44" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButtonDone" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButtonCleanTextArea" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButtonSelectXML" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jButtonCleanTextArea" max="32767" attributes="0"/>
+                                          <Component id="jButtonSelectXML" max="32767" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jButtonDone" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -356,7 +355,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jButtonSelectXML" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="jButtonCleanTextArea" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButtonDone" min="-2" max="-2" attributes="0"/>
@@ -371,14 +370,14 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelNameProject">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Project:"/>
+                <Property name="text" type="java.lang.String" value="Name of the System:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNameProject">
             </Component>
             <Component class="javax.swing.JButton" name="jButtonSelectXML">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Select XML Files"/>
+                <Property name="text" type="java.lang.String" value="Select a XML File"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectXMLActionPerformed"/>
@@ -410,12 +409,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelXmlSelected">
               <Properties>
-                <Property name="text" type="java.lang.String" value="XMLs Selected:"/>
+                <Property name="text" type="java.lang.String" value="Selected XML:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCleanTextArea">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Clean XML Selected"/>
+                <Property name="text" type="java.lang.String" value="Clean Selection"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCleanTextAreaActionPerformed"/>

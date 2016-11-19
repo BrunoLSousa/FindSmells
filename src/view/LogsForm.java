@@ -85,6 +85,11 @@ public class LogsForm extends javax.swing.JFrame {
 
         jComboBoxMetric.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         refreshComboMetrics();
+        jComboBoxMetric.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMetricActionPerformed(evt);
+            }
+        });
 
         jLabelSubject.setText("Subject:");
 
@@ -313,6 +318,10 @@ public class LogsForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonExportActionPerformed
+
+    private void jComboBoxMetricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMetricActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxMetricActionPerformed
 
     private int createLog(File file) {
         FileWriter log = null;
