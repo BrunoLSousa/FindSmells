@@ -2,11 +2,10 @@
 
 *FindSmells: Flexible Composition of Bad Smell Detection Strategies*
 
-Trabalho em grupo da disciplina Reutilização de Software - UFMG
+Tool for detection of bad smells in code through detection strategies and software metrics.
 
 ##Goal
 
-FindSmells 
 FindSmells is a tool developed in the programing language JAVA that support the detection of bad smells based on XML files. With the 
 tool, the user can propose its own detection strategies considering the software metrics available in the XML file, the comparison 
 logical operators, and the thresholds informed by the user. To run the detection strategy, FindSmells filters the source code 
