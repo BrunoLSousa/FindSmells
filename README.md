@@ -27,11 +27,11 @@ The tool also exports the obtained results via CSV file to provide easy manipula
 ##Links
 
 An example video usage has been made available on YouTube. It can be found at the following link:
-    - https://www.youtube.com/watch?v=irvicSTUDw4&t=5s
+- **https://www.youtube.com/watch?v=irvicSTUDw4&t=5s**
 
 For more information, visit the FindSmells tool page. There, you can find the documentation and the its jar executable file. The 
 page can be found at the following link:
-    - http://www2.dcc.ufmg.br/laboratorios/llp/Products/Products/indexProducts.html
+- **http://www2.dcc.ufmg.br/laboratorios/llp/Products/Products/indexProducts.html**
 
 ## FindSmells Installation Requirements
 
