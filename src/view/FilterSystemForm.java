@@ -166,7 +166,7 @@ public class FilterSystemForm extends javax.swing.JFrame {
         jTextAreaXmlFiles.setRows(5);
         jScrollPane1.setViewportView(jTextAreaXmlFiles);
 
-        jButtonDone.setText("Done");
+        jButtonDone.setText("Import");
         jButtonDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDoneActionPerformed(evt);

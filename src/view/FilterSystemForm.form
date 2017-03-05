@@ -401,7 +401,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButtonDone">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Done"/>
+                <Property name="text" type="java.lang.String" value="Import"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDoneActionPerformed"/>

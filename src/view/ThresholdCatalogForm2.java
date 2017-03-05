@@ -153,7 +153,7 @@ public class ThresholdCatalogForm2 extends javax.swing.JFrame {
         jTextAreaReference.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         jTextAreaReference.setSelectionColor(new java.awt.Color(255, 255, 255));
         String reference = "T. Filó, M. Bigonha, and K. Ferreira, \"A Catalogue of Thresholds for Object-Oriented"
-        + "Software Metrics,\" in Proceedings of the 1st Internation Conference on Advances  and"
+        + "Software Metrics,\" in Proceedings of the 1st Internation Conference on Advances and "
         + "Trends in Software Engineering (SOFTENG), 2015, pp. 48-55.";
 
         jTextAreaReference.setText(reference);

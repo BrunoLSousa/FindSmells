@@ -264,7 +264,7 @@ public class RemoveProjectForm extends javax.swing.JFrame {
                 dao.remove(project.getId());
             }
         }
-        JOptionPane.showMessageDialog(this, "The selected systems we removed successfully!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "The selected systems were removed successfully!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
         this.projects = new ProjectDAO().selectProjectsByFilter(this.jTextFieldNameProject.getText());
         this.mainScreen.refreshProjects();
         this.selectedAll = false;

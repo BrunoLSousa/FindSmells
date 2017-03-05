@@ -103,7 +103,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="String reference = &quot;T. Fil&#xf3;, M. Bigonha, and K. Ferreira, \&quot;A Catalogue of Thresholds for Object-Oriented&quot;&#xa;                 + &quot;Software Metrics,\&quot; in Proceedings of the 1st Internation Conference on Advances  and&quot;&#xa;                 + &quot;Trends in Software Engineering (SOFTENG), 2015, pp. 48-55.&quot;;&#xa;&#xa;jTextAreaReference.setText(reference);&#xa;jTextAreaReference.setLineWrap(true);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="String reference = &quot;T. Fil&#xf3;, M. Bigonha, and K. Ferreira, \&quot;A Catalogue of Thresholds for Object-Oriented&quot;&#xa;                 + &quot;Software Metrics,\&quot; in Proceedings of the 1st Internation Conference on Advances and &quot;&#xa;                 + &quot;Trends in Software Engineering (SOFTENG), 2015, pp. 48-55.&quot;;&#xa;&#xa;jTextAreaReference.setText(reference);&#xa;jTextAreaReference.setLineWrap(true);"/>
               </AuxValues>
             </Component>
           </SubComponents>
