@@ -4,7 +4,7 @@
 
 Tool for detection of bad smells in code through detection strategies and software metrics.
 
-##Goal
+## Goal
 
 FindSmells is a tool developed in the programing language JAVA that support the detection of bad smells based on XML files. With the 
 tool, the user can propose its own detection strategies considering the software metrics available in the XML file, the comparison 
@@ -12,9 +12,9 @@ logical operators, and the thresholds informed by the user. To run the detection
 elements, methods and classes, that are in accordance with the rules defined for each metric that composes the detection strategy. 
 The tool also exports the obtained results via CSV file to provide easy manipulation and further analysis. 
 
-##Main Features
+## Main Features
 
-###Versão 1.0
+### Versão 1.0
 - **Import of Computed Metrics;**
 - **Composition of Detection Strategies;**
 - **Management of Detection Strategies;**
@@ -23,7 +23,7 @@ The tool also exports the obtained results via CSV file to provide easy manipula
 - **Log Visualization;**
 - **Help;**
 
-##Links
+## Links
 
 An example video usage has been made available on YouTube. It can be found at the following link:
 - **https://www.youtube.com/watch?v=irvicSTUDw4&t=5s**
