@@ -30,7 +30,7 @@ An example video usage has been made available on YouTube. It can be found at th
 
 For more information, visit the FindSmells tool page. There, you can find the documentation and the its jar executable file. The 
 page can be found at the following link:
-- **http://www2.dcc.ufmg.br/laboratorios/llp/Products/indexProducts.html**
+- **http://llp.dcc.ufmg.br/Products/indexProducts.html**
 
 ## FindSmells Installation Requirements
 
